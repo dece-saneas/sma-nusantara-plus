@@ -30,7 +30,7 @@
 		</div>
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
-				<h4>Dashboard <small class="font-size-base opacity-50">Informasi tentang PPDB 2021 - 2022</small></h4>
+				<h4>Dashboard <small class="font-size-base opacity-50">Informasi tentang PSB 2021 - 2022</small></h4>
 			</div>
 		</div>
 		<div class="navbar navbar-expand-md navbar-dark bg-primary-800 border-top-0">
@@ -56,14 +56,14 @@
 					</li>
 					<li class="nav-item">
 						<a href="#" class="navbar-nav-link ">
-							<i class="icon-bookmark mr-2"></i>
-							Data Rapor
+							<i class="icon-file-upload2 mr-2"></i>
+							Unggah Berkas
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link ">
-							<i class="icon-file-upload2 mr-2"></i>
-							Unggah Berkas
+						<a href="#" class="navbar-nav-link disabled">
+							<i class="fas fa-pencil-alt mr-2"></i>
+							Tes Akademik
 						</a>
 					</li>
 				</ul>

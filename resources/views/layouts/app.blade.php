@@ -9,6 +9,7 @@
 	<link href="{{ asset('css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/dashboard/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/dashboard/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/dashboard/layout.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/dashboard/components.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/dashboard/colors.min.css') }}" rel="stylesheet" type="text/css">

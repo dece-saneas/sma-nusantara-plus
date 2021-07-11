@@ -8,17 +8,17 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h5 class="card-title"><i class="icon-info22"></i> Pengumuman (Gelombang 2 Sesi 2)</h5>
+                            <h5 class="card-title"><i class="icon-info22 mr-2"></i>Pengumuman</h5>
                         </div>
                         <div class="card-body">
-                            <p class="alert alert-primary">Anda belum terdaftar di Gelombang 2 Sesi 2. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
+                            <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h5 class="card-title">Pilih Gelombang PPDB</h5>
+                            <h5 class="card-title">Pilih Gelombang</h5>
                         </div>
                         <div class="card-body">
                             <p class="mb-3">Sebelum mengisi data pendaftaran, silahkan terlebih dahulu memilih jalur pendaftaran berikut ini.</p>
@@ -44,23 +44,7 @@
                                                         <td class="p-1 text-center">01-10-2020</td>
                                                         <td class="p-1 text-center">11-12-2020</td>
                                                         <td class="p-1 text-center">
-                                                            <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Gelombang 2</td>
-                                                        <td class="p-1 text-center">23-12-2020</td>
-                                                        <td class="p-1 text-center">26-03-2021</td>
-                                                        <td class="p-1 text-center">
-                                                            <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Gelombang 2 Sesi 2</td>
-                                                        <td class="p-1 text-center">04-06-2021</td>
-                                                        <td class="p-1 text-center">05-06-2021</td>
-                                                        <td class="p-1 text-center">
-                                                            <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
+                                                            <a href="javasript:void(0)" class="btn btn-primary btn-sm"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
