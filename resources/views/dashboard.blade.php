@@ -11,7 +11,7 @@
                             <h5 class="card-title"><i class="icon-info22"></i> Pengumuman (Gelombang 2 Sesi 2)</h5>
                         </div>
                         <div class="card-body">
-                            <p class="alert alert-warning">Anda belum terdaftar di Gelombang 2 Sesi 2. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
+                            <p class="alert alert-primary">Anda belum terdaftar di Gelombang 2 Sesi 2. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
                         </div>
                     </div>
                 </div>
