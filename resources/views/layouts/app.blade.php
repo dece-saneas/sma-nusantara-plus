@@ -15,8 +15,8 @@
 	<link href="{{ asset('css/dashboard/custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body class="">
-	<div class="page-header page-header-dark bg-danger-800">
-		<div class="navbar navbar-expand-md navbar-dark bg-danger-800 border-transparent">
+	<div class="page-header page-header-dark bg-primary-800">
+		<div class="navbar navbar-expand-md navbar-dark bg-primary-800 border-transparent">
 			<div class="navbar-brand wmin-0 mr-5">
 				<a href="#" class="d-inline-block">
 					<img src="{{ asset('img/logo_light.png') }}" alt="">
@@ -50,7 +50,7 @@
 				<h4>Dashboard <small class="font-size-base opacity-50">Informasi tentang PPDB 2021 - 2022</small></h4>
 			</div>
 		</div>
-		<div class="navbar navbar-expand-md navbar-dark bg-danger-800 border-top-0">
+		<div class="navbar navbar-expand-md navbar-dark bg-primary-800 border-top-0">
 			<div class="d-md-none w-100">
 				<button type="button" class="navbar-toggler d-flex align-items-center w-100" data-toggle="collapse" data-target="#navbar-navigation">
 					<i class="icon-menu-open mr-2"></i>
@@ -138,7 +138,7 @@
                                                             <td class="p-1 text-center">01-10-2020</td>
                                                             <td class="p-1 text-center">11-12-2020</td>
                                                             <td class="p-1 text-center">
-                                                                <a class="btn bg-danger btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
+                                                                <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -146,7 +146,7 @@
                                                             <td class="p-1 text-center">23-12-2020</td>
                                                             <td class="p-1 text-center">26-03-2021</td>
                                                             <td class="p-1 text-center">
-                                                                <a class="btn bg-danger btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
+                                                                <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -154,7 +154,7 @@
                                                             <td class="p-1 text-center">04-06-2021</td>
                                                             <td class="p-1 text-center">05-06-2021</td>
                                                             <td class="p-1 text-center">
-                                                                <a class="btn bg-danger btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
+                                                                <a class="btn bg-primary btn-sm disabled"><i class="icon-blocked mr-2"></i>Sudah Ditutup</a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
