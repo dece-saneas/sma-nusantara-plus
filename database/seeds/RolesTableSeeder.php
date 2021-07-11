@@ -17,6 +17,14 @@ class RolesTableSeeder extends Seeder
                 'name' => 'Super Admin',
                 'permission' => []
             ],
+            1 => [
+                'name' => 'Admin',
+                'permission' => []
+            ],
+            2 => [
+                'name' => 'User',
+                'permission' => []
+            ],
         ];
         
         foreach ($roles as $role) {

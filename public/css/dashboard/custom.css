@@ -1,0 +1,332 @@
+.nowrap {
+  white-space: normal !important;
+}
+.dataTables_length {
+    float: left;
+}
+.dataTables_filter {
+    margin: 0 0 0 .75rem;
+}
+/*.dataTables_filter input {
+    padding: .3125rem .75rem;
+}*/
+.datatable-footer, .datatable-header {
+    padding: 1rem 1rem 0 1rem;
+}
+/*.select2-selection--single {
+    padding: .3125rem 0;
+}
+.dataTables_length {
+    margin: 0 0 1rem 1.25rem;
+}
+.dt-buttons {
+    margin: 0 0 1rem 1.25rem;
+}
+.btn-add {
+    margin-left: 10px;
+}*/
+.dataTables_info {
+    margin-bottom: 1rem;
+}
+.dataTables_paginate .paginate_button {
+    padding: .2375rem;
+}
+.page-title {
+    padding: 1.25rem 0;
+}
+.bg-grey-100 {
+    background-color: #eee;
+}
+.modal-footer {
+    padding: .85rem 1.25rem;
+}
+/*.content {
+		padding: 0 10px 80px;
+	}
+	.page-header-default {
+		margin-bottom: 10px;
+	}*/
+.daterange-custom-display::after {
+    content:'';
+}
+.icons-list {
+    margin-left:30px !important;
+}
+.form-group {
+    margin-bottom:10px;
+}
+.btn-table {
+    padding:2px 8px !important;
+    border-radius:0px !important;
+}
+.label-table {
+    font-size:11px;
+}
+.center {
+    text-align:center;
+}
+
+.yloading {
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+    top:0px;
+    left:0px;
+    background-color:rgba(51,51,51,0.5);
+    z-index: 130299;
+    position: fixed;
+    display:none;
+}
+.loader-container {
+    width: 150px;
+    height: 150px;
+    padding: 50px;
+    background-color:#232323;
+    color:#FFF;
+    text-align: center;
+    border-radius: 10px !important;
+    position: fixed;
+    z-index: 130300;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+
+    box-sizing:content-box !important;
+}
+
+.theme_xbox, .theme_xbox_sm, .theme_xbox_xs {
+    width: 100px;
+    height: 100px;
+}
+
+.theme_xbox .pace_activity, .theme_xbox_sm .pace_activity, .theme_xbox_xs .pace_activity {
+    width: 150px;
+    height: 150px;
+}
+
+.theme_xbox .pace_activity, .theme_xbox .pace_activity::after, .theme_xbox .pace_activity::before, .theme_xbox_sm .pace_activity, .theme_xbox_sm .pace_activity::after, .theme_xbox_sm .pace_activity::before, .theme_xbox_xs .pace_activity, .theme_xbox_xs .pace_activity::after, .theme_xbox_xs .pace_activity::before {
+    border-top-color: #61ED00;
+}
+
+.theme_xbox_with_text span {
+    width:150px;
+    margin-top: 7px;
+}
+
+.yloading .theme_xbox, .yloading .theme_xbox_lg, .yloading .theme_xbox_sm {
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: 0px;
+}
+.table td {
+    padding: .5rem 1.25rem;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #1E88E5;
+} 
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #1E88E5;
+}
+
+.custom-control-label::before {
+    background-color: #ccc;
+}
+
+.label-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+  }
+
+/* Hide the browser's default checkbox */
+.label-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.label-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .label-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .label-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .label-container .checkmark:after {
+      left: 7px;
+      top: 2px;
+      width: 7px;
+      height: 13px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(40deg);
+      transform: rotate(40deg);
+  }
+
+img {
+  opacity: 1 !important;
+}
+
+#bukti_bayar, #bukti_bayar2 {
+    height: 300px;
+    max-width: 650px;
+    border-width: 2px;
+    margin-bottom: 20px;
+    color: #ccc;
+    background-color: #fbfafa;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 300px;
+    text-align: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: -10;
+    background-position: 50% 50%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+[type="radio"] {
+    position: absolute;
+    margin: 2px -13px !important;
+    transform: scale(2.0);
+    -ms-transform: scale(2.0);
+    -moz-transform: scale(2.0);
+    -o-transform: scale(2.0);
+    opacity: 0;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .item_pilihan {
+      display: inline-block;
+      margin: 0 3%;
+  }
+  
+  [type="radio"] + .opsi {
+      border: 1px solid #d4d4d4;
+      border-radius: 5px;
+      padding: 4px 0px;
+      margin: 0;
+      background: #fff;
+      color: #aaa;
+      height: 30px;
+      width: 30px;
+      line-height: 22px;
+      font-weight: 400;
+  }
+  [type="radio"]:checked + .opsi {
+    border: 1px solid #2a96de;
+    background: #39a9f4;
+    cursor: pointer;
+    color: #fff;
+  }
+  [type="radio"]:hover + .opsi {
+    border: 1px solid #62b6ef;
+    background: #6bbaef;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  #kotak-soal {
+    font-size: 15px;
+  }
+  
+  .box-item-jawaban {
+    display: inline-block;
+    margin: 10px;
+  }
+  .box-item-jawaban:hover, .panel-jawaban:hover, .soal-ragu:hover {
+    cursor: pointer;
+  }
+  .opsi-jawaban {
+      position: absolute;
+      border: 1px solid #929292;
+      border-radius: 5px 5px 0 0;
+      background: #ccc;
+      margin-top: -10px;
+      width: 45px;
+      height: 20px;
+      text-align: center;
+      font-weight: 500;
+  }
+  .nomor-jawaban {
+    border: 1px solid #929292;
+      padding: 10px;
+      font-weight: 500;
+      text-align: center;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      border-radius: 5px;
+      color: #293a50;
+  }
+  .terjawab .nomor-jawaban {
+      background: #293a50;
+      color: #fff;
+      border: 1px solid #293a50;
+  }
+  .ragu .nomor-jawaban {
+    background: #e9ec00;
+    border: 2px solid #a9ab2a;
+    color: #fff;
+  }
+  .aktif .nomor-jawaban {
+      background: #26a69a;
+      border: 1px solid #1f9489;
+      color: #fff;
+  }

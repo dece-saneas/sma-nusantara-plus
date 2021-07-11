@@ -19,6 +19,11 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Super Admin',
                 'email' => 'admin.super@mail.com',
                 'role' => 'Super Admin'
+            ],
+            1 => [
+                'name' => 'Admin',
+                'email' => 'admin@mail.com',
+                'role' => 'Admin'
             ]
         ];
         
