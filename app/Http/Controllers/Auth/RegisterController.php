@@ -90,7 +90,8 @@ class RegisterController extends Controller
         
         // $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        session()->flash('success', 'Silahkan verifikasi email anda');
+        
+        return redirect()->route('login');
     }
 }

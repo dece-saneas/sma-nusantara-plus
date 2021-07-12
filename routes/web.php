@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes(['reset' => false, 'verify' => false, 'confirm' => false]);
+Auth::routes(['reset' => true, 'verify' => true, 'confirm' => false]);
 
 Route::prefix('super-admin')->group(function () {
     Route::resource('users','Core\UserController', ['as' => 'core'])->except(['show']);

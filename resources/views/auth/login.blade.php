@@ -12,6 +12,7 @@
 	<link href="{{ asset('css/layout.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/components.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/colors.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/sweetalert.min.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body class="">
 	<div class="page-content login-cover">
@@ -61,7 +62,7 @@
                                     <span class="px-2"><i class="icon-mustache" style="font-size: 30px;"></i></span>
                                 </div>
                                 <div class="form-group">
-                                    <a href="#" class="btn btn-light btn-block btn-lg"><i class="icon-rotate-ccw3 mr-2"></i>Lupa Kata Sandi</a>
+                                    <a href="{{ route('password.request') }}" class="btn btn-light btn-block btn-lg"><i class="icon-rotate-ccw3 mr-2"></i>Lupa Kata Sandi</a>
                                 </div>
                             </form>
                             <span class="form-text text-center text-muted">Supported by SMA Nusantara Plus</span>
@@ -78,5 +79,27 @@
 	<script src="{{ asset('js/plugins/forms/styling/uniform.min.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('js/plugins/notifications/pnotify.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.min.js')}}"></script>
+    <!-- Alert -->
+    @php ($alert = ['success', 'info', 'error', 'warning', 'question'])
+    @foreach ($alert as $type)
+    @if(session()->has($type))
+    <script>
+        $(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+
+            Toast.fire({
+                icon: '{{ $type }}',
+                title: '{!! session($type) !!}',
+            });
+        });
+    </script>
+    @endif
+    @endforeach
 </body>
 </html>
