@@ -45,9 +45,11 @@ class LoginController extends Controller
         // Check Verified
         $user = User::where('email', $request->email)->first();
         
-        if($user->email_verified_at == NULL) {
-            session()->flash('error', 'Akun anda belum terverifikasi');
-            return redirect()->back();
+        if(!empty($user)) {
+            if($user->email_verified_at == NULL) {
+                session()->flash('error', 'Akun anda belum terverifikasi');
+                return redirect()->back();
+            }
         }
         
         // If the class is using the ThrottlesLogins trait, we can automatically throttle

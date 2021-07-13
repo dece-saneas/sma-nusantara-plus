@@ -72,8 +72,7 @@
 		<ul class="fab-menu fab-menu-absolute fab-menu-top-right" data-fab-toggle="click">
 			<li>
 				<a target="_blank" class="fab-menu-btn btn bg-teal-600 btn-float rounded-round btn-icon" href="https://api.whatsapp.com/send?phone=6285101656160">
-					<i class="fab-icon-open icon-bubbles2"></i>
-					<i class="fab-icon-close icon-bubbles2"></i>
+					<h1 class="m-0"><i class="fab fa-whatsapp"></i></h1> 
 				</a>
 			</li>
 		</ul>

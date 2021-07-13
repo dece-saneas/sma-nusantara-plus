@@ -330,3 +330,8 @@ input[type=number] {
       border: 1px solid #1f9489;
       color: #fff;
   }
+.fab-menu-btn.btn-float {
+    width: 60px;
+    height: 60px;
+    padding: 1.05rem;
+}
