@@ -96,36 +96,10 @@
                                             <div class="mr-3 align-self-center">
                                             <i class="icon-cross2 icon-2x"></i>
                                             </div>
-                                            <div class="media-body text-right">
-                                                <h6 class="media-title font-weight-semibold">Data Nilai Rapor</h6>
-                                                <span class="opacity-75">Input nilai rapor kalian</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
-                                        <div class="media">
-                                            <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
-                                            </div>
 
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Unggah Berkas</h6>
                                                 <span class="opacity-75">SK sehat &amp; Ishihara</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
-                                        <div class="media">
-                                            <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
-                                            </div>
-                                            <div class="media-body text-right">
-                                                <h6 class="media-title font-weight-semibold">Pilihan Jurusan</h6>
-                                                <span class="opacity-75">Tentukan juruan kalian</span>
                                             </div>
                                         </div>
                                     </div>
@@ -150,34 +124,8 @@
                                             <i class="icon-cross2 icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
-                                                <h6 class="media-title font-weight-semibold">Cetak Kartu Peserta</h6>
-                                                <span class="opacity-75">Unduh/cetak kartu peserta</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
-                                        <div class="media">
-                                            <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
-                                            </div>
-                                            <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Tes Akademik</h6>
                                                 <span class="opacity-75">Pastikan bayar pendaftaran</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
-                                        <div class="media">
-                                            <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
-                                            </div>
-                                            <div class="media-body text-right">
-                                                <h6 class="media-title font-weight-semibold">Daftar Ulang Tes</h6>
-                                                <span class="opacity-75">Transfer Biaya Daful</span>
                                             </div>
                                         </div>
                                     </div>

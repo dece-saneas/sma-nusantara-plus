@@ -7,10 +7,10 @@
 		</div>
 		<div class="navbar-collapse collapse" id="navbar-footer">
 			<span class="navbar-text">
-				© 2021 <a href="#">PPDB SMK Telkom Malang</a>
+				© 2021 <a href="#">PSB SMA Nusantara Plus Ciputat</a>
 			</span>
 			<ul class="navbar-nav ml-lg-auto">
-				<li class="nav-item"><a href="https://api.whatsapp.com/send?phone=6285101656160" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Bantuan</a></li>
+				<li class="nav-item"><a href="https://api.whatsapp.com/send?phone=62878875999468" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Bantuan</a></li>
 			</ul>
 		</div>
 	</div>

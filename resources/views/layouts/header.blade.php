@@ -71,7 +71,7 @@
 		</div>
 		<ul class="fab-menu fab-menu-absolute fab-menu-top-right" data-fab-toggle="click">
 			<li>
-				<a target="_blank" class="fab-menu-btn btn bg-teal-600 btn-float rounded-round btn-icon" href="https://api.whatsapp.com/send?phone=6285101656160">
+				<a target="_blank" class="fab-menu-btn btn bg-teal-600 btn-float rounded-round btn-icon" href="https://api.whatsapp.com/send?phone=6287887599468">
 					<h1 class="m-0"><i class="fab fa-whatsapp"></i></h1> 
 				</a>
 			</li>

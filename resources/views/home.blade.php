@@ -72,7 +72,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-md-6 col-lg-6">
                         <div class="hero-content-left ptb-100">
-                            <h1><span>PSB Online</span><br>SMK Telkom Malang</h1>
+                            <h1><span>PSB Online</span><br>SMA Nusantra Plus</h1>
                             <p class="lead">Untuk calon pendaftar tahun ajaran 2021/2022 bisa mendaftar melalui website ini atau langsung datang ke tempat pendaftaran</p>
                             <p>
                                 <a href="{{ route('login') }}" class="btn solid-btn">Daftar Sekarang</a> 
@@ -118,7 +118,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link h6" href="#tab6-3" data-toggle="tab">
                                             <h4 class="mb-1">3</h4>
-                                            Isi <br> Formulir
+                                           Data Identitas
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -275,7 +275,7 @@
                                 <span class="ti-vector text-white"></span>
                             </div>
                             <h5>Tes Akademik</h5>
-                            <p>Diambil dari nilai rapor semester 1 s/d 4 dan berkas scan rapor, serta ujian tulis yang dilakukan secara online.</p>
+                            <p>Diambil dari nilai ujian tulis yang dilakukan secara online.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
