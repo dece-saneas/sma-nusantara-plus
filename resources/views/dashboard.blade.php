@@ -4,6 +4,9 @@
 <div class="page-content">
     <div class="content-wrapper">
         <div class="content">
+            @role('Admin')
+            @endrole
+            @role('User')
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
@@ -135,6 +138,7 @@
                     </div>
                 </div>
             </div>
+            @endrole
         </div>
     </div>
 </div>

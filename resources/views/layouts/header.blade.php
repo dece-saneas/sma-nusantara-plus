@@ -48,6 +48,9 @@
 							Dashboard
 						</a>
 					</li>
+                    @role('Admin')
+                    @endrole
+                    @role('User')
 					<li class="nav-item">
 						<a href="#" class="navbar-nav-link ">
 							<i class="icon-person mr-2"></i>
@@ -66,6 +69,7 @@
 							Tes Akademik
 						</a>
 					</li>
+                    @endrole
 				</ul>
 			</div>
 		</div>
