@@ -25,6 +25,7 @@
                                                     <th class="text-center" colspan="2">Tanggal</th>
                                                     <th class="text-center" colspan="2">Kuota</th>
                                                     <th rowspan="2" class="text-center">Biaya Pendaftaran</th>
+                                                    <th rowspan="2" class="text-center"><i class="icon-more2"></i></th>
                                                 </tr>
                                                 <tr>
                                                     <th class="text-center">Dibuka</th>
@@ -43,6 +44,9 @@
                                                     <td class="text-center">{{ $gelombang->total_quota }}</td>
                                                     <td class="text-center">{{ $gelombang->remaining_quota }}</td>
                                                     <td class="text-center">Rp {{ number_format($gelombang->fee,0,"",".") }}</td>
+                                                        <td class="p-1 text-center">
+                                                            <a href="{{ route('gelombang.edit', $gelombang->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Edit</a>
+                                                        </td>
                                                 </tr>
                                                 @endforeach
                                                 @endif
@@ -117,6 +121,15 @@
                                                     @endif
                                                 </tbody>
                                             </table>
+                                            @if(count($composer['gelombang']) == 0)
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="p-1 text-center" rowspan="2">Belum ada Gelombang</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>

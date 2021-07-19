@@ -75,9 +75,11 @@ class GelombangController extends Controller
      * @param  \App\Gelombang  $gelombang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gelombang $gelombang)
+    public function edit($id)
     {
-        //
+        $gelombang = Gelombang::findOrFail($id);
+        
+        return view('pages.gelombang-edit', ['gelombang' => $gelombang]);
     }
 
     /**
@@ -87,9 +89,29 @@ class GelombangController extends Controller
      * @param  \App\Gelombang  $gelombang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gelombang $gelombang)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'period' => 'required',
+            'qty' => 'required',
+            'fee' => 'required',
+        ]);
+        
+        $gelombang = Gelombang::findOrFail($id);
+        
+        $period = (explode(" s/d ",$request->period));
+        
+        $gelombang->name = $request->name;
+        $gelombang->start_period = date("Y-m-d", strtotime($period[0])).' 23:59:59';
+        $gelombang->end_period = date("Y-m-d", strtotime($period[1])).' 23:59:59';
+        $gelombang->total_quota = $request->qty;
+        $gelombang->fee = $request->fee;
+        $gelombang->save();
+     
+        session()->flash('success', 'Gelombang berhasil di ubah !');
+        
+        return redirect()->route('dashboard');
     }
 
     /**
