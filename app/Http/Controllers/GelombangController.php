@@ -105,8 +105,8 @@ class GelombangController extends Controller
         $gelombang->name = $request->name;
         $gelombang->start_period = date("Y-m-d", strtotime($period[0])).' 23:59:59';
         $gelombang->end_period = date("Y-m-d", strtotime($period[1])).' 23:59:59';
-        $gelombang->total_quota = $request->qty;
         $gelombang->remaining_quota = $request->qty-($gelombang->total_quota-$gelombang->remaining_quota);
+        $gelombang->total_quota = $request->qty;
         $gelombang->fee = $request->fee;
         $gelombang->save();
      
