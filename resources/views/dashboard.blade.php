@@ -5,6 +5,65 @@
     <div class="content-wrapper">
         <div class="content">
             @role('Admin')
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header header-elements-inline">
+                            <h5 class="card-title">Daftar Gelombang</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="btn-group btn-group-sm mb-2" role="group" aria-label="Action">
+                                <a href="{{ route('gelombang.create') }}" class="btn btn-success"> <i class="fas fa-plus mr-2"></i>Buat Gelombang</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="p-1 text-center" rowspan="2">Gelombang</th>
+                                                    <th class="text-center" colspan="2">Tanggal</th>
+                                                    <th class="text-center" colspan="2">Kuota</th>
+                                                    <th rowspan="2" class="text-center">Biaya Pendaftaran</th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Dibuka</th>
+                                                    <th class="text-center">Ditutup</th>
+                                                    <th class="text-center">Jumlah</th>
+                                                    <th class="text-center">Sisa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(count($composer['gelombang']) > 0)
+                                                @foreach($composer['gelombang'] as $gelombang)
+                                                <tr>
+                                                    <td class="text-center">{{ $gelombang->name }}</td>
+                                                    <td class="text-center">{{ $gelombang->start_period->format('d F Y') }}</td>
+                                                    <td class="text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
+                                                    <td class="text-center">{{ $gelombang->total_quota }}</td>
+                                                    <td class="text-center">{{ $gelombang->remaining_quota }}</td>
+                                                    <td class="text-center">Rp {{ number_format($gelombang->fee,0,"",".") }}</td>
+                                                </tr>
+                                                @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                        @if(count($composer['gelombang']) == 0)
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="p-1 text-center" rowspan="2">Belum ada Gelombang</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endrole
             @role('User')
             <div class="row">
@@ -32,8 +91,9 @@
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th class="p-1 text-center" rowspan="2">Jalur</th>
+                                                        <th class="p-1 text-center" rowspan="2">Gelombang</th>
                                                         <th class="text-center" colspan="2">Tanggal</th>
+                                                    <th class="p-1 text-center" rowspan="2">Sisa Kuota</th>
                                                         <th rowspan="2" class="text-center"><i class="icon-more2"></i></th>
                                                     </tr>
                                                     <tr>
@@ -42,14 +102,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @if(count($composer['gelombang']) > 0)
+                                                    @foreach($composer['gelombang'] as $gelombang)
                                                     <tr>
-                                                        <td>Gelombang  1</td>
-                                                        <td class="p-1 text-center">01-10-2020</td>
-                                                        <td class="p-1 text-center">11-12-2020</td>
+                                                        <td>{{ $gelombang->name }}</td>
+                                                        <td class="p-1 text-center">{{ $gelombang->start_period->format('d F Y') }}</td>
+                                                        <td class="p-1 text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
+                                                        <td class="p-1 text-center">{{ $gelombang->remaining_quota }}</td>
                                                         <td class="p-1 text-center">
-                                                            <a href="javasript:void(0)" class="btn btn-primary btn-sm"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
+                                                            <a href="javasript:void(0)" class="btn btn-light btn-sm disabled"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
                                                         </td>
                                                     </tr>
+                                                    @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </form>
