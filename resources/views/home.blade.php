@@ -75,8 +75,8 @@
                             <h1><span>PSB Online</span><br>SMA Nusantra Plus</h1>
                             <p class="lead">Untuk calon pendaftar tahun ajaran 2021/2022 bisa mendaftar melalui website ini atau langsung datang ke tempat pendaftaran</p>
                             <p>
-                                <a href="{{ route('login') }}" class="btn solid-btn">Daftar Sekarang</a> 
-                                <span id="counter" style="margin-left: 20px" class="btn solid-btn bg-light text-dark">GEL 2 DITUTUP!</span>
+                                <a href="{{ route('register') }}" class="btn solid-btn">Daftar Sekarang</a> 
+                                <span id="counter" style="margin-left: 20px" class="btn solid-btn bg-light text-dark">Belum ada Gelombang</span>
                             </p>
                         </div>
                     </div>
@@ -154,16 +154,6 @@
                                                             <span class="ti-check"></span>
                                                         </div>
                                                     </div>
-                                                    <div><p class="mb-0">Pilih tab Daftar</p></div>
-                                                </div>
-                                            </li>
-                                            <li class="py-2">
-                                                <div class="d-flex align-items-center">
-                                                    <div>
-                                                        <div class="badge badge-circle badge-primary mr-3">
-                                                            <span class="ti-check"></span>
-                                                        </div>
-                                                    </div>
                                                     <div><p class="mb-0">Masukan data awal pendaftaran</p></div>
                                                 </div>
                                             </li>
@@ -180,7 +170,7 @@
                                         </ul>
                                     </div>
                                     <div class="tab-pane" id="tab6-2">
-                                        <p>Silahkan memilih jalur/gelombang yang tersedia. Pastikan tanggal pendaftaran sudah dibuka dan belum ditutup.</p>
+                                        <p>Silahkan memilih Jalur / Gelombang yang tersedia. Pastikan tanggal pendaftaran sudah dibuka dan belum ditutup.</p>
                                     </div>
                                     <div class="tab-pane" id="tab6-3">
                                         <ul class="list-unstyled">
@@ -309,24 +299,25 @@
                         <div class="section-heading text-center mb-5">
                             <h2>Biaya dan Jadwal</h2>
                             <p class="lead">
+                                @if($composer['gelombang_now'])
                                 Berikut rincian biaya masuk dan jadwal kegiatan PSB tahun pelajaran 2021-2022
+                                @else
+                                Maaf belum ada Gelombang yang terseda untuk saat ini.
+                                @endif
                             </p>
                         </div>
                     </div>
                 </div>
+                @if($composer['gelombang_now'])
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md">
                         <div class="card text-center single-pricing-pack">
                             <div class="card-header py-5 border-0 pricing-header">
                                 <div class="h1 text-center mb-0">Biaya <span class="price font-weight-bolder">Masuk</span></div>
-                                <span class="h6 text-muted">Gelombang 2 Sesi 2</span>
+                                <span class="h6 text-muted">{{ $composer['gelombang_now']->name }}</span>
                             </div>
                             <div class="card-body">
-                                <p>Biaya pendaftaran sebesar<br><h4>Rp200.000</h4>Transfer ke No.Rek Bank BTN
-                                    <h6>9.3509.930.0000.11100 <br>
-                                    TS-SMK TELKOM MALANG</h6>
-                                </p>
-                                <p>Total biaya daftar ulang bagi siswa yang dinyatakan diterima sebesar<br><h5>Rp17.950.000</h5></p>
+                                <p>Biaya pendaftaran sebesar<br><h4>Rp200.000</h4></p>
                             </div>
                         </div>
                     </div>
@@ -334,30 +325,16 @@
                         <div class="card text-center single-pricing-pack">
                             <div class="card-header py-5 border-0 pricing-header">
                                 <div class="h1 text-center mb-0">Jadwal <span class="price font-weight-bolder">PSB</span></div>
-                                <span class="h6 text-muted">Gelombang 2 Sesi 2</span>
+                                <span class="h6 text-muted">{{ $composer['gelombang_now']->name }}</span>
                             </div>
                             <div class="card-body">
-                                <h6 class="font-weight-bold">Pendaftaran</b></h6>
-                                04 June 2021 - 05 June 2021
-                                <h6 class="font-weight-bold">Tes AkademiK</b></h6>
-                                08 June 2021
-                                <h6 class="font-weight-bold">Tes Non Akademik</b></h6>
-                                08 June 2021                            
-                                <h6 class="font-weight-bold">Pengumuman Lolos Tes Akademik</b></h6>
-                                14 Desember 2020
-                                <h6 class="font-weight-bold">Tes Kesemaptaan</b></h6>
-                                17 - 18 Desember 2020
-                                <h6 class="font-weight-bold">Tes Wawancara Siswa & Orang Tua</b></h6>
-                                19 - 20 Desember 2020
-                                <h6 class="font-weight-bold">Pengumuman Akhir</b></h6>
-                                09 June 2021
-                                <h6 class="font-weight-bold">Daftar Ulang</b></h6>
-                                10 June 2021 - 12 June 2021
-                                <br><br>
+                                <h6 class="font-weight-bold">Periode Gelombang</b></h6>
+                                {{ $composer['gelombang_now']->start_period->format('d M Y') }} - {{ $composer['gelombang_now']->end_period->format('d M Y') }}
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </section>
     </div>
@@ -452,8 +429,9 @@
     <script src="{{ asset('js/validator.min.js') }}"></script>
     <!--custom js-->
     <script src="{{ asset('js/scripts.js') }}"></script>
+    @if($composer['gelombang_now'])
     <script>
-        var countDownDate = new Date("Jul 14, 2021 23:59:00").getTime();
+        var countDownDate = new Date("{{ $composer['gelombang_now']->end_period }}").getTime();
         var x = setInterval(function() {
             var now = new Date().getTime();
 
@@ -469,9 +447,10 @@
 
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("counter").innerHTML = "GEL 4 DITUTUP!";
+                document.getElementById("counter").innerHTML = "{{ $composer['gelombang_now']->name }} Ditutup";
             }
         }, 1000);
     </script>
+    @endif
 </body>
 </html>

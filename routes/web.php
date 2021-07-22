@@ -22,4 +22,4 @@ Route::prefix('super-admin')->group(function () {
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('gelombang','GelombangController');
+Route::resource('gelombang','GelombangController')->except(['index', 'show']);

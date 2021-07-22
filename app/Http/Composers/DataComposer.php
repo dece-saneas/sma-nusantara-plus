@@ -3,6 +3,7 @@
 namespace App\Http\Composers;
 
 use Illuminate\View\View;
+use Carbon\Carbon;
 use App\Models\Gelombang;
 
 class DataComposer
@@ -10,8 +11,13 @@ class DataComposer
     public function compose(View $view)
     {
         $composer = [
-            'gelombang' => Gelombang::orderBy('created_at', 'ASC')->get()
+            'gelombang' => Gelombang::orderBy('created_at', 'ASC')->get(),
+            'gelombang_now' => Gelombang::where('start_period', '<=', Carbon::now())->where('end_period', '>=', Carbon::now())->first()
         ];
+        
+        if(empty($composer['gelombang_now'])) {
+            $composer['gelombang_now'] = Gelombang::where('start_period', '<=', Carbon::now())->orderBy('created_at', 'DESC')->first();
+        }
         
         $view->with('composer', $composer);
     }

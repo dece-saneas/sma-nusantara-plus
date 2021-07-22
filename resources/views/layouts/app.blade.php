@@ -18,6 +18,7 @@
 	<link href="{{ asset('css/dashboard/custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body class="">
+    @yield('modal')
     @include('layouts.header')
 	@yield('content')
     @include('layouts.footer')

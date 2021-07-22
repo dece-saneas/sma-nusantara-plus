@@ -1,5 +1,31 @@
 @extends('layouts.app')
 
+@section('modal')
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bb-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center py-0">
+                <h4 class="modal-title mb-2"><strong>Are you sure?</strong></h4>
+                <h6 class="modal-messages m-0">Are you really want to delete these records? This process cannot be undone.</h6>
+            </div>
+            <div class="modal-body text-center">
+                <form method="POST" id="DeleteForm"> 
+                    <button class="btn btn-sm btn-light mx-1 px-4" data-dismiss="modal" aria-label="Close">Cancel</button> 
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm btn-danger mx-1 px-4">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 <div class="page-content">
     <div class="content-wrapper">
@@ -44,9 +70,12 @@
                                                     <td class="text-center">{{ $gelombang->total_quota }}</td>
                                                     <td class="text-center">{{ $gelombang->remaining_quota }}</td>
                                                     <td class="text-center">Rp {{ number_format($gelombang->fee,0,"",".") }}</td>
-                                                        <td class="p-1 text-center">
+                                                    <td class="p-1 text-center">
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
                                                             <a href="{{ route('gelombang.edit', $gelombang->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Edit</a>
-                                                        </td>
+                                                            <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#DeleteModal" data-uri="{{ route('gelombang.destroy', $gelombang->id) }}"><i class="fas fa-trash"></i></button>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                                 @endif
@@ -114,7 +143,7 @@
                                                         <td class="p-1 text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
                                                         <td class="p-1 text-center">{{ $gelombang->remaining_quota }}</td>
                                                         <td class="p-1 text-center">
-                                                            <a href="javasript:void(0)" class="btn btn-light btn-sm disabled"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
+                                                            <a href="javasript:void(0)" class="btn @if($gelombang->start_period > Carbon\Carbon::today() || $gelombang->end_period < Carbon\Carbon::today()) btn-light @else btn-success @endif btn-sm @if($gelombang->start_period > Carbon\Carbon::today()) disabled @elseif($gelombang->end_period < Carbon\Carbon::today()) disabled @endif"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
                                                         </td>
                                                     </tr>
                                                     @endforeach

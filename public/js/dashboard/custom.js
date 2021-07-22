@@ -27,3 +27,14 @@ $(document).ready(function(){
     
     $('#period').val('');
 });
+
+// Modal Confirm Delete
+$('#DeleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var uri = button.data('uri')
+    // var modal = $(this)
+    
+    // modal.find('.modal-title').text(uri)
+    
+    $("#DeleteForm").attr("action", uri);
+})

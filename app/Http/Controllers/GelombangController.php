@@ -121,8 +121,13 @@ class GelombangController extends Controller
      * @param  \App\Gelombang  $gelombang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gelombang $gelombang)
+    public function destroy($id)
     {
-        //
+        $gelombang = Gelombang::findOrFail($id);
+        $gelombang->delete();
+        
+        session()->flash('success', 'Gelombang berhasil di hapus !');
+        
+        return redirect()->back();
     }
 }
