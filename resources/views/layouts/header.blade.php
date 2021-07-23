@@ -52,13 +52,13 @@
                     @endrole
                     @role('User')
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link ">
+						<a href="#" class="navbar-nav-link @if(Auth::user()->gelombang_id == NULL) disabled @endif">
 							<i class="icon-person mr-2"></i>
 							Data Identitas
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link ">
+						<a href="#" class="navbar-nav-link disabled">
 							<i class="icon-file-upload2 mr-2"></i>
 							Unggah Berkas
 						</a>

@@ -106,7 +106,15 @@
                             <h5 class="card-title"><i class="icon-info22 mr-2"></i>Pengumuman</h5>
                         </div>
                         <div class="card-body">
+                            @if(Auth::user()->gelombang_id == NULL)
                             <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
+                            @endif
+                            @php $alert = ['primary', 'danger'] @endphp
+                            @foreach ($alert as $type)
+                            @if(session()->has($type))
+                            <p class="alert alert-primary">{{ session($type) }}</p>
+                            @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -143,7 +151,7 @@
                                                         <td class="p-1 text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
                                                         <td class="p-1 text-center">{{ $gelombang->remaining_quota }}</td>
                                                         <td class="p-1 text-center">
-                                                            <a href="javasript:void(0)" class="btn @if($gelombang->start_period > Carbon\Carbon::today() || $gelombang->end_period < Carbon\Carbon::today()) btn-light @else btn-success @endif btn-sm @if($gelombang->start_period > Carbon\Carbon::today()) disabled @elseif($gelombang->end_period < Carbon\Carbon::today()) disabled @endif"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
+                                                            <a href="{{ route('select.gelombang', $gelombang->id) }}" class="btn @if($gelombang->start_period > Carbon\Carbon::today() || $gelombang->end_period < Carbon\Carbon::today()) btn-light @else btn-primary @endif btn-sm @if($gelombang->start_period > Carbon\Carbon::today()) disabled @elseif($gelombang->end_period < Carbon\Carbon::today()) disabled @endif  @if(Auth::user()->gelombang_id == $gelombang->id) disabled @endif"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -175,10 +183,10 @@
                             <p class="mb-3">Periksa alur pendaftaran kalian melalui langkah berikut ini.</p>
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url({{ asset('img/panel_bg.png') }});">
+                                    <div class="card card-body @if(Auth::user()->gelombang_id == NULL) bg-light @else bg-dark @endif" style="background-image: url({{ asset('img/panel_bg.png') }});">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
+                                            <i class="@if(Auth::user()->gelombang_id == NULL) icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Gelombang</h6>

@@ -20,6 +20,10 @@ Route::prefix('super-admin')->group(function () {
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard/gelombang/{id}', 'DashboardController@select_gelombang')->name('select.gelombang');
+
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('gelombang','GelombangController')->except(['index', 'show']);
+Route::resource('identitas','IdentitasController');
