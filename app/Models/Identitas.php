@@ -18,4 +18,9 @@ class Identitas extends Model
     ];
     
     protected $dates = ['tanggal_lahir'];
+    
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User');
+    }
 }

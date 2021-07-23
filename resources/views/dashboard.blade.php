@@ -108,13 +108,9 @@
                         <div class="card-body">
                             @if(Auth::user()->gelombang_id == NULL)
                             <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
+                            @else
+                            <p class="alert alert-primary">Selamat kamu telah terdaftar di {{ Auth::user()->gelombang->name }}. Silahkan isi Data Identitas!</p>
                             @endif
-                            @php $alert = ['primary', 'danger'] @endphp
-                            @foreach ($alert as $type)
-                            @if(session()->has($type))
-                            <p class="alert alert-primary">{{ session($type) }}</p>
-                            @endif
-                            @endforeach
                         </div>
                     </div>
                 </div>

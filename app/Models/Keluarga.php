@@ -18,4 +18,9 @@ class Keluarga extends Model
     ];
     
     protected $dates = ['tanggal_lahir_ayah', 'tanggal_lahir_ibu', 'tanggal_lahir_wali'];
+    
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User');
+    }
 }

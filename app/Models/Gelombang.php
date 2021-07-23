@@ -18,4 +18,9 @@ class Gelombang extends Model
     ];
     
     protected $dates = ['start_period', 'end_period'];
+    
+    public function user()
+    {
+    	return $this->hasMany('App\Models\User');
+    }
 }
