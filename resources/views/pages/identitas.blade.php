@@ -281,7 +281,7 @@ $(document).ready(function(){
                     </div>
                     
                     <!-- Keterangan Ayah Kandung -->
-                    <div class="card @if(old('keadaan_ayah') == 'Sudah Meninggal' || $keluarga->nama_ayah == NULL) d-none @endif" id="cardAyah">
+                    <div class="card @if(old('keadaan_ayah') == 'Sudah Meninggal') d-none @endif" id="cardAyah">
                         <div class="card-header">
                             <h6 class="card-title"><strong>Keterangan Ayah Kandung</strong></h6>
                         </div>
@@ -904,7 +904,7 @@ $(document).ready(function(){
                     </div>
                     
                     <!-- Keterangan Ibu Kandung -->
-                    <div class="card @if(old('keadaan_ibu') == 'Sudah Meninggal' || $keluarga->nama_ibu == NULL) d-none @endif" id="cardIbu">
+                    <div class="card @if(old('keadaan_ibu') == 'Sudah Meninggal') d-none @endif" id="cardIbu">
                         <div class="card-header">
                             <h6 class="card-title"><strong>Keterangan Ibu Kandung</strong></h6>
                         </div>
