@@ -9,7 +9,8 @@
 // Select
 $(document).ready(function(){
     $(".select").select2({
-        placeholder: "Select"
+        placeholder: "Select",
+        theme: "bootstrap4",
     });
 });
 
@@ -26,6 +27,13 @@ $(document).ready(function(){
     })
     
     $('#period').val('');
+});
+
+// Daterangepicker
+$(document).ready(function(){
+    $('.datepicker').datetimepicker({
+        format: "L",
+    })
 });
 
 // Modal Confirm Delete

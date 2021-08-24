@@ -106,9 +106,9 @@
                             <h5 class="card-title"><i class="icon-info22 mr-2"></i>Pengumuman</h5>
                         </div>
                         <div class="card-body">
-                            @if(Auth::user()->gelombang_id == NULL)
+                            @if(Auth::user()->status == NULL)
                             <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
-                            @else
+                            @elseif(Auth::user()->status == 'Isi Identitas')
                             <p class="alert alert-primary">Selamat kamu telah terdaftar di {{ Auth::user()->gelombang->name }}. Silahkan isi Data Identitas!</p>
                             @endif
                         </div>
@@ -147,7 +147,21 @@
                                                         <td class="p-1 text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
                                                         <td class="p-1 text-center">{{ $gelombang->remaining_quota }}</td>
                                                         <td class="p-1 text-center">
-                                                            <a href="{{ route('select.gelombang', $gelombang->id) }}" class="btn @if($gelombang->start_period > Carbon\Carbon::today() || $gelombang->end_period < Carbon\Carbon::today()) btn-light @else btn-primary @endif btn-sm @if($gelombang->start_period > Carbon\Carbon::today()) disabled @elseif($gelombang->end_period < Carbon\Carbon::today()) disabled @endif  @if(Auth::user()->gelombang_id == $gelombang->id) disabled @endif"><i class="fas fa-check mr-2"></i>Pilih Gelombang</a>
+                                                            <a href="{{ route('select.gelombang', $gelombang->id) }}" class="btn btn-sm 
+                                                            @if(Auth::user()->gelombang_id !== NULL)
+                                                                @if(Auth::user()->gelombang_id == $gelombang->id)
+                                                                    btn-primary disabled
+                                                                @else
+                                                                    btn-light disabled
+                                                                @endif
+                                                            @else
+                                                                @if($gelombang->start_period > Carbon\Carbon::today() || $gelombang->end_period < Carbon\Carbon::today() || $gelombang->remaining_quota == 0)
+                                                                    btn-light disabled
+                                                                @else
+                                                                    btn-primary
+                                                                @endif
+                                                            @endif
+                                                            "><i class="fas @if(Auth::user()->gelombang_id !== $gelombang->id) fa-check @else fa-user @endif mr-2"></i>@if(Auth::user()->gelombang_id !== $gelombang->id) Pilih Gelombang @else Gelombang Saya @endif</a>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -192,10 +206,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status !== 'Upload') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
+                                            <i class="@if(Auth::user()->status !== 'Upload') icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Data Identitas</h6>

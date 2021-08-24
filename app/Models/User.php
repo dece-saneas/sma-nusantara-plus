@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gelombang_id',
+        'name', 'email', 'password', 'gelombang_id', 'no_registration', 'status'
     ];
 
     /**
@@ -39,9 +39,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
     
+    public function identitas()
+    {
+    	return $this->hasOne('App\Models\Identitas');
+    }
+    
     public function keluarga()
     {
-    	return $this->hasMany('App\Models\Keluarga');
+    	return $this->hasOne('App\Models\Keluarga');
     }
     
     public function gelombang()

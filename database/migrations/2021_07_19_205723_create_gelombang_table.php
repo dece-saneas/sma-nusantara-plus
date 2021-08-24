@@ -16,8 +16,8 @@ class CreateGelombangTable extends Migration
         Schema::create('gelombang', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('start_period');
-            $table->string('end_period');
+            $table->dateTime('start_period');
+            $table->dateTime('end_period');
             $table->string('total_quota');
             $table->string('remaining_quota');
             $table->string('fee');

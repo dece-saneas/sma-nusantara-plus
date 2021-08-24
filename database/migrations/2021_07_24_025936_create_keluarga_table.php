@@ -51,22 +51,22 @@ class CreateKeluargaTable extends Migration
             $table->string('negara_ibu',25)->nullable();
             $table->string('no_handphone_ibu',55)->nullable();
             
-            $table->string('nama_wali',50);
-            $table->string('tempat_lahir_wali',25);
-            $table->dateTime('tanggal_lahir_wali');
-            $table->string('agama_wali',25);
-            $table->string('kewarganegaraan_wali',25);
-            $table->string('pendidikan_wali',25);
-            $table->string('pekerjaan_wali',25);
-            $table->string('penghasilan_wali',25);
-            $table->string('alamat_wali',50);
-            $table->string('kelurahan_wali',25);
-            $table->string('kecamatan_wali',25);
-            $table->string('kota_wali',25);
-            $table->string('provinsi_wali',25);
-            $table->string('kode_pos_wali',10);
-            $table->string('negara_wali',25);
-            $table->string('no_handphone_wali',15);
+            $table->string('nama_wali',50)->nullable();
+            $table->string('tempat_lahir_wali',25)->nullable();
+            $table->dateTime('tanggal_lahir_wali')->nullable();
+            $table->string('agama_wali',25)->nullable();
+            $table->string('kewarganegaraan_wali',25)->nullable();
+            $table->string('pendidikan_wali',25)->nullable();
+            $table->string('pekerjaan_wali',25)->nullable();
+            $table->string('penghasilan_wali',25)->nullable();
+            $table->string('alamat_wali',50)->nullable();
+            $table->string('kelurahan_wali',25)->nullable();
+            $table->string('kecamatan_wali',25)->nullable();
+            $table->string('kota_wali',25)->nullable();
+            $table->string('provinsi_wali',25)->nullable();
+            $table->string('kode_pos_wali',10)->nullable();
+            $table->string('negara_wali',25)->nullable();
+            $table->string('no_handphone_wali',15)->nullable();
             
             $table->timestamps();
             

@@ -73,10 +73,10 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="hero-content-left ptb-100">
                             <h1><span>PSB Online</span><br>SMA Nusantra Plus</h1>
-                            <p class="lead">Untuk calon pendaftar tahun ajaran 2021/2022 bisa mendaftar melalui website ini atau langsung datang ke tempat pendaftaran</p>
+                            <p class="lead">Untuk calon pendaftar tahun ajaran {{ Carbon\Carbon::now()->year }} / {{ Carbon\Carbon::now()->addYear(1)->year }} bisa mendaftar melalui website ini atau langsung datang ke tempat pendaftaran</p>
                             <p>
-                                <a href="{{ route('register') }}" class="btn solid-btn">Daftar Sekarang</a> 
-                                <span id="counter" style="margin-left: 20px" class="btn solid-btn bg-light text-dark">Belum ada Gelombang</span>
+                                @if($composer['gelombang_now']) <a href="{{ route('register') }}" class="btn solid-btn" id="Daftar">Daftar Sekarang</a> @endif
+                                <span id="counter" @if($composer['gelombang_now']) style="margin-left: 20px" @endif class="btn solid-btn bg-light text-dark">Belum ada Gelombang</span>
                             </p>
                         </div>
                     </div>
@@ -253,7 +253,7 @@
                         <div class="section-heading text-center mb-5">
                             <h2>Tahapan Seleksi<br><span>apa aja?</span></h2>
                             <p class="lead">
-                                Berikut tahapan seleksi yang harus dilalui pada PSB SMA Nusantara Plus tahun 2021/2022
+                                Berikut tahapan seleksi yang harus dilalui pada PSB SMA Nusantara Plus tahun {{ Carbon\Carbon::now()->year }} / {{ Carbon\Carbon::now()->addYear(1)->year }}
                             </p>
                         </div>
                     </div>
@@ -317,7 +317,7 @@
                                 <span class="h6 text-muted">{{ $composer['gelombang_now']->name }}</span>
                             </div>
                             <div class="card-body">
-                                <p>Biaya pendaftaran sebesar<br><h4>Rp200.000</h4></p>
+                                <p>Biaya pendaftaran sebesar<br><h4>Rp {{ number_format($composer['gelombang_now']->fee,0,',','.') }}</h4></p>
                             </div>
                         </div>
                     </div>
@@ -399,7 +399,7 @@
             <div class="container">
                 <div class="row text-center justify-content-center">
                     <div class="col-md-6 col-lg-5"><p class="copyright-text pb-0 mb-0">
-                        Copyrights © 2020 All rights reserved by
+                        Copyrights © 2021 All rights reserved by
                         <a href="#">SMA Nusantara Plus</a></p>
                     </div>
                 </div>
@@ -448,6 +448,13 @@
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("counter").innerHTML = "{{ $composer['gelombang_now']->name }} Ditutup";
+                
+                $("#Daftar").addClass("d-none");
+                
+                $('#counter').attr('style', function(i, style)
+                {
+                    return style && style.replace(/margin-left[^;]+;?/g, '');
+                });
             }
         }, 1000);
     </script>

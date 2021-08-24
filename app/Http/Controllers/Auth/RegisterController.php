@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Gelombang;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +45,23 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $gelombang = Gelombang::where('start_period', '<=', Carbon::now())->where('end_period', '>=', Carbon::now())->first();
+        
+        if($gelombang) {
+            return view('auth.register');
+        }else {
+            abort(404);
+        }
+        
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -67,10 +86,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $lastuser = User::orderBy('no_registration', 'DESC')->first();
+        
+        $year = substr(Carbon::now()->year, -2);
+        
+        $no = "0".$year.($year+1)."001";
+        
+        if(substr($lastuser->no_registration,1, 2) == $year) {
+            $no =  "0".$year.($year+1).sprintf('%03d', substr($lastuser->no_registration,-3)+1);
+        }
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'no_registration' => $no,
         ]);
     }
 

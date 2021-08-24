@@ -15,7 +15,7 @@
 					<li class="nav-item dropdown dropdown-user">
 						<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 							<img src="{{ asset('img/placeholders/user.jpg') }}" class="rounded-circle mr-2" alt="" height="34">
-							<span>{{ Auth::user()->name }}</span>
+							<span>{{ Auth::user()->name }} @role('User')| <strong>{{ Auth::user()->no_registration }}</strong>@endrole</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a href="#" class="dropdown-item"><i class="icon-key"></i> Ubah Kata Sandi</a>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
-				<h4>Dashboard <small class="font-size-base opacity-50">Informasi tentang PSB 2021 - 2022</small></h4>
+				<h4>Dashboard <small class="font-size-base opacity-50">Informasi tentang PSB {{ Carbon\Carbon::now()->year }} - {{ Carbon\Carbon::now()->addYear(1)->year }}</small></h4>
 			</div>
 		</div>
 		<div class="navbar navbar-expand-md navbar-dark bg-primary-800 border-top-0">
@@ -43,7 +43,7 @@
 			<div class="navbar-collapse collapse" id="navbar-navigation">
 				<ul class="navbar-nav navbar-nav-highlight">
 					<li class="nav-item">
-						<a href="{{ route('dashboard') }}" class="navbar-nav-link active">
+						<a href="{{ route('dashboard') }}" class="navbar-nav-link {{ HelperMenu::active('route',['dashboard']) }}">
 							<i class="icon-home4 mr-2"></i>
 							Dashboard
 						</a>
@@ -52,13 +52,13 @@
                     @endrole
                     @role('User')
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link @if(Auth::user()->gelombang_id == NULL) disabled @endif">
+						<a href="@if(Auth::user()->status == NULL) javascript:void(0); @else {{ route('identitas') }} @endif" class="navbar-nav-link {{ HelperMenu::active('route',['identitas']) }} @if(Auth::user()->status == NULL) disabled @endif">
 							<i class="icon-person mr-2"></i>
 							Data Identitas
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link disabled">
+						<a href="@if(Auth::user()->status !== 'Upload') javascript:void(0); @else # @endif" class="navbar-nav-link @if(Auth::user()->status !== 'Upload') disabled @endif">
 							<i class="icon-file-upload2 mr-2"></i>
 							Unggah Berkas
 						</a>

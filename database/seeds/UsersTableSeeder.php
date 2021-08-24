@@ -19,17 +19,20 @@ class UsersTableSeeder extends Seeder
             0 => [
                 'name' => 'Super Admin',
                 'email' => 'admin.super@mail.com',
-                'role' => 'Super Admin'
+                'role' => 'Super Admin',
+                'no_registration' => NULL
             ],
             1 => [
                 'name' => 'Admin',
                 'email' => 'admin@mail.com',
-                'role' => 'Admin'
+                'role' => 'Admin',
+                'no_registration' => NULL
             ],
             2 => [
                 'name' => 'User',
                 'email' => 'user@mail.com',
-                'role' => 'User'
+                'role' => 'User',
+                'no_registration' => '02122001'
             ]
         ];
         
@@ -38,7 +41,8 @@ class UsersTableSeeder extends Seeder
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make(12345678),
-                'email_verified_at' => Carbon::now()->toDateTimeString()
+                'email_verified_at' => Carbon::now()->toDateTimeString(),
+                'no_registration' => $user['no_registration'],
             ]);
             
             $create->assignRole($user['role']);
