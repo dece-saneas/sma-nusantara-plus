@@ -9,6 +9,7 @@ use App\Models\Identitas;
 use App\Models\Keluarga;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Berkas;
 
 class DashboardController extends Controller
 {
@@ -29,6 +30,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $user = User::findOrFail(Auth::id());
+        
+        if(Auth::user()->gelombang_id !== NULL) {
+            $gelombang = Gelombang::findOrFail(Auth::user()->gelombang_id);
+
+            if($gelombang->end_period->isPast()) {
+                if(Auth::user()->status !== 'Verified') {
+                    $user->gelombang_id = NULL;
+                    $user->status = NULL;
+                    $user->save();
+                }
+            }
+        }
+        
         return view('dashboard');
     }
     
@@ -292,6 +307,8 @@ class DashboardController extends Controller
         if($user->status == 'Isi Identitas') {
             $user->status = 'Upload';
             $user->save();
+        
+            $berkas = Berkas::create([ 'user_id' =>  Auth::id() ]);
         }
         
         session()->flash('success', 'Data berhasil di diperbarui !');
@@ -299,8 +316,12 @@ class DashboardController extends Controller
         return redirect()->back();
     }
     
-    public function test()
-    {
-        return view('test');
+    public function unggah()
+    { if(Auth::user()->gelombang_id == NULL) abort(404);
+        
+        $berkas = Berkas::where('user_id', Auth::id())->first();
+        $gelombang = Gelombang::findOrFail(Auth::user()->gelombang_id);
+     
+        return view('pages.unggah-berkas', ['berkas' => $berkas, 'gelombang' => $gelombang]);
     }
 }

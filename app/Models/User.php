@@ -49,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
     	return $this->hasOne('App\Models\Keluarga');
     }
     
+    public function berkas()
+    {
+    	return $this->hasOne('App\Models\Berkas');
+    }
+    
     public function gelombang()
     {
     	return $this->belongsTo('App\Models\Gelombang');

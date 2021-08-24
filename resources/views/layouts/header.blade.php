@@ -58,7 +58,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="@if(Auth::user()->status !== 'Upload') javascript:void(0); @else # @endif" class="navbar-nav-link @if(Auth::user()->status !== 'Upload') disabled @endif">
+						<a href="@if(Auth::user()->status !== 'Upload') javascript:void(0); @else {{ route('unggah') }} @endif" class="navbar-nav-link @if(Auth::user()->status !== 'Upload') disabled @endif">
 							<i class="icon-file-upload2 mr-2"></i>
 							Unggah Berkas
 						</a>

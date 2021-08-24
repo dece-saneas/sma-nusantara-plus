@@ -20,15 +20,14 @@ Route::prefix('super-admin')->group(function () {
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/gelombang/{id}', 'DashboardController@select_gelombang')->name('select.gelombang');
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('gelombang','GelombangController')->except(['index', 'show']);
-Route::get('/tes', 'DashboardController@test')->name('test');
 
 // Admin
-
+Route::resource('gelombang','GelombangController')->except(['index', 'show']);
 
 
 // User
+Route::get('/dashboard/gelombang/{id}', 'DashboardController@select_gelombang')->name('select.gelombang');
 Route::get('/identitas','DashboardController@identitas')->name('identitas');
 Route::put('/identitas/','DashboardController@identitas_update')->name('identitas.update');
+Route::get('/unggah-berkas/','DashboardController@unggah')->name('unggah');

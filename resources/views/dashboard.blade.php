@@ -110,6 +110,8 @@
                             <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
                             @elseif(Auth::user()->status == 'Isi Identitas')
                             <p class="alert alert-primary">Selamat kamu telah terdaftar di {{ Auth::user()->gelombang->name }}. Silahkan isi Data Identitas!</p>
+                            @elseif(Auth::user()->status == 'Upload')
+                            <p class="alert alert-primary">Silahkan Unggah berkas yang dibutuhkan!</p>
                             @endif
                         </div>
                     </div>
