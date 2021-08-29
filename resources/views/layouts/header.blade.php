@@ -70,7 +70,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link @if(Auth::user()->status !== 'Ujian') disabled @endif">
+						<a href="#" class="navbar-nav-link @if(Auth::user()->status !== 'Verified') disabled @endif">
 							<i class="fas fa-pencil-alt mr-2"></i>
 							Tes Akademik
 						</a>
@@ -81,7 +81,7 @@
 		</div>
 		<ul class="fab-menu fab-menu-absolute fab-menu-top-right" data-fab-toggle="click">
 			<li>
-				<a target="_blank" class="fab-menu-btn btn bg-teal-600 btn-float rounded-round btn-icon" href="https://api.whatsapp.com/send?phone=6287887599468">
+				<a target="_blank" class="fab-menu-btn btn btn-light btn-float rounded-round btn-icon" href="https://api.whatsapp.com/send?phone=6287887599468">
 					<h1 class="m-0"><i class="fab fa-whatsapp"></i></h1> 
 				</a>
 			</li>

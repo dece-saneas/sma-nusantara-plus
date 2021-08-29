@@ -206,10 +206,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body @if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Ujian') bg-dark @else bg-light @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Verified') bg-dark @else bg-light @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="@if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Ujian') icon-check2 @else icon-cross2 @endif icon-2x"></i>
+                                            <i class="@if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Verified') icon-check2 @else icon-cross2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Data Identitas</h6>
@@ -219,10 +219,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body @if(Auth::user()->status !== 'Ujian') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status !== 'Verified') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="@if(Auth::user()->status !== 'Ujian') icon-cross2 @else icon-check2 @endif icon-2x"></i>
+                                            <i class="@if(Auth::user()->status !== 'Verified') icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
 
                                             <div class="media-body text-right">
@@ -233,10 +233,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body @if(Auth::user()->status !== 'Ujian') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status !== 'Verified') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="@if(Auth::user()->status !== 'Ujian') icon-cross2 @else icon-check2 @endif icon-2x"></i>
+                                            <i class="@if(Auth::user()->status !== 'Verified') icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Bayar Pendaftaran</h6>

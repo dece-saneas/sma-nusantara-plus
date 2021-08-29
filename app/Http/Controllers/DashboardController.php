@@ -480,7 +480,7 @@ class DashboardController extends Controller
         }
         
         if($berkas->photo_status == 'Terverifikasi' && $berkas->surat_ket_sehat_status == 'Terverifikasi' && $berkas->payment_status == 'Terverifikasi') {
-            $user->status = 'Ujian';
+            $user->status = 'Verified';
             $user->save();
         }
         
