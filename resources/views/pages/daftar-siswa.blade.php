@@ -71,6 +71,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                     <th class="p-1 text-center">No Pendaftaran</th>
                                                     <th class="text-center">Nama Lengkap</th>
                                                     <th class="text-center">Asal Sekolah</th>
+                                                    <th class="text-center" rowspan="2">Status</th>
                                                     <th rowspan="2" class="text-center"><i class="icon-more2"></i></th>
                                                 </tr>
                                             </thead>
@@ -82,6 +83,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                     <td class="text-center">{{ $u->no_registration }}</td>
                                                     <td class="text-center">{{ $u->name }}</td>
                                                     <td class="text-center">@if($u->status == 'Isi Identitas') <span class="badge badge-pill badge-light px-2">Belum di Isi</span> @else {{ $u->identitas->nama_sekolah }} @endif</td>
+                                                    <td class="text-center"><span class="badge @if($u->status == 'Verified') badge-primary @else badge-light @endif">{{ $u->status }}</span></td>
                                                     <td class="text-center"><button class="btn btn-primary btn-sm"><i class="fas fa-print mr-2"></i>Print</button></td>
                                                 </tr>
                                                 @endforeach
