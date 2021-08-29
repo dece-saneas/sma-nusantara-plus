@@ -124,7 +124,7 @@ $(document).ready(function(){
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="kewarganegaraan">Kewarganegaraan *</label>
-                                            <select class="form-control select @error('kewarganegaraan') is-invalid @enderror" id="kewarganegaraan" name="kewarganegaraan" value="{{ old('kewarganegaraan', $identitas->kewarganegaraan) }}">
+                                            <select class="form-control @error('kewarganegaraan') is-invalid @enderror select" id="kewarganegaraan" name="kewarganegaraan" value="{{ old('kewarganegaraan', $identitas->kewarganegaraan) }}">
                                                 <option></option>
                                                 @foreach($countries as $country)
                                                 <option value="{{ $country->langEN }}" @if($country->langEN == $identitas->kewarganegaraan || $country->langEN == old('kewarganegaraan')) selected @endif>{{ $country->langEN }}</option>

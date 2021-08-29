@@ -34,13 +34,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
-                        <div class="card-header header-elements-inline">
+                        <div class="card-header header-elements-inline justify-content-between">
                             <h5 class="card-title">Daftar Gelombang</h5>
+                            <a href="{{ route('gelombang.create') }}" class="btn btn-success"> <i class="fas fa-plus mr-2"></i>Buat Gelombang</a>
                         </div>
                         <div class="card-body">
-                            <div class="btn-group btn-group-sm mb-2" role="group" aria-label="Action">
-                                <a href="{{ route('gelombang.create') }}" class="btn btn-success"> <i class="fas fa-plus mr-2"></i>Buat Gelombang</a>
-                            </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="table-responsive">
@@ -208,10 +206,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body @if(Auth::user()->status !== 'Upload') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Ujian') bg-dark @else bg-light @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="@if(Auth::user()->status !== 'Upload') icon-cross2 @else icon-check2 @endif icon-2x"></i>
+                                            <i class="@if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Ujian') icon-check2 @else icon-cross2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Data Identitas</h6>
@@ -221,24 +219,24 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status !== 'Ujian') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
+                                            <i class="@if(Auth::user()->status !== 'Ujian') icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
 
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Unggah Berkas</h6>
-                                                <span class="opacity-75">SK sehat &amp; Ishihara</span>
+                                                <span class="opacity-75">Upload data yang dibutuhkan</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body bg-light" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status !== 'Ujian') bg-light @else bg-dark @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="icon-cross2 icon-2x"></i>
+                                            <i class="@if(Auth::user()->status !== 'Ujian') icon-cross2 @else icon-check2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Bayar Pendaftaran</h6>
@@ -255,7 +253,7 @@
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Tes Akademik</h6>
-                                                <span class="opacity-75">Pastikan bayar pendaftaran</span>
+                                                <span class="opacity-75">Ujian online 1 jam 30 menit</span>
                                             </div>
                                         </div>
                                     </div>

@@ -18,9 +18,6 @@
     <div class="content-wrapper">
         <div class="content">
             <div class="row justify-content-center">
-                <div class="col-xl-8 d-flex justify-content-between mb-2">
-                    <a href="{{ route('dashboard') }}" class="btn btn-light"><i class="fas fa-chevron-left mr-2"></i>Kembali</a>
-                </div>
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body">

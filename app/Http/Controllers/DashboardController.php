@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Auth, Image, File;
 use App\Models\Gelombang;
 use App\Models\Identitas;
 use App\Models\Keluarga;
@@ -56,8 +56,16 @@ class DashboardController extends Controller
         $user->status = 'Isi Identitas';
         $user->save();
         
-        $identitas = Identitas::create([ 'user_id' =>  Auth::id() ]);        
-        $keluarga = Keluarga::create([ 'user_id' =>  Auth::id() ]);
+        if(empty(Identitas::where('user_id', Auth::id()))) {
+            $identitas = Identitas::create([ 'user_id' =>  Auth::id() ]);        
+            $keluarga = Keluarga::create([ 'user_id' =>  Auth::id() ]);
+            $berkas = Berkas::create([ 
+                'user_id' =>  Auth::id(),
+                'photo_status' => 'Belum di Upload',
+                'surat_ket_sehat_status' => 'Belum di Upload',
+                'payment_status' => 'Belum di Upload',
+            ]);
+        }
 		
         return redirect()->route('dashboard');
     }
@@ -307,11 +315,9 @@ class DashboardController extends Controller
         if($user->status == 'Isi Identitas') {
             $user->status = 'Upload';
             $user->save();
-        
-            $berkas = Berkas::create([ 'user_id' =>  Auth::id() ]);
         }
         
-        session()->flash('success', 'Data berhasil di diperbarui !');
+        session()->flash('success', 'Data berhasil diperbarui !');
         
         return redirect()->back();
     }
@@ -323,5 +329,163 @@ class DashboardController extends Controller
         $gelombang = Gelombang::findOrFail(Auth::user()->gelombang_id);
      
         return view('pages.unggah-berkas', ['berkas' => $berkas, 'gelombang' => $gelombang]);
+    }
+    
+    public function berkas_update(Request $request)
+    { if(Auth::user()->gelombang_id == NULL) abort(404);
+        $berkas = Berkas::where('user_id', Auth::id())->first();
+     
+        if($request->hasFile('photo')){
+            
+            $this->validate($request,[
+                'photo' => 'required|file|image|mimes:jpeg,png|max:2048',
+            ]);
+            
+            $photo = $request->file('photo');
+            $photo_filename =  Auth::user()->no_registration.'-photo'.'.'.$photo->getClientOriginalExtension();
+            Image::make($photo)->save(public_path('img/berkas/'.$photo_filename));
+            
+            $berkas->photo =  $photo_filename;
+            $berkas->photo_status = 'Menunggu Verifikasi';
+            $berkas->save();
+        }
+     
+        if($request->hasFile('sehat')){
+            
+            $this->validate($request,[
+                'sehat' => 'required|file|image|mimes:jpeg,png|max:2048',
+            ]);
+            
+            $sehat = $request->file('sehat');
+            $sehat_filename =  Auth::user()->no_registration.'-sehat'.'.'.$sehat->getClientOriginalExtension();
+            Image::make($sehat)->save(public_path('img/berkas/'.$sehat_filename));
+            
+            $berkas->surat_ket_sehat =  $sehat_filename;
+            $berkas->surat_ket_sehat_status = 'Menunggu Verifikasi';
+            $berkas->save();
+        }
+     
+        if($request->hasFile('payment')){
+            
+            $this->validate($request,[
+                'payment' => 'required|file|image|mimes:jpeg,png|max:2048',
+            ]);
+            
+            $payment = $request->file('payment');
+            $payment_filename =  Auth::user()->no_registration.'-payment'.'.'.$payment->getClientOriginalExtension();
+            Image::make($payment)->save(public_path('img/berkas/'.$payment_filename));
+            
+            $berkas->payment =  $payment_filename;
+            $berkas->payment_status = 'Menunggu Verifikasi';
+            $berkas->save();
+        }
+        
+        session()->flash('success', 'Berkas berhasil di unggah !');
+        
+        return redirect()->back();
+    }
+    
+    public function berkas_destroy($type)
+    { if(Auth::user()->gelombang_id == NULL) abort(404);
+        
+        $berkas = Berkas::where('user_id', Auth::id())->first();
+     
+        if($type == 'Payment') {
+            File::delete('img/berkas/'.$berkas->payment);
+            
+            $berkas->paymnet =  NULL;
+            $berkas->paymnet_status = 'Belum di Upload';
+            $berkas->save();
+        }
+     
+        if($type == 'Sehat') {
+            File::delete('img/berkas/'.$berkas->surat_ket_sehat);
+            
+            $berkas->surat_ket_sehat =  NULL;
+            $berkas->surat_ket_sehat_status = 'Belum di Upload';
+            $berkas->save();
+        }
+     
+        if($type == 'Photo') {
+            File::delete('img/berkas/'.$berkas->photo);
+            
+            $berkas->photo =  NULL;
+            $berkas->photo_status = 'Belum di Upload';
+            $berkas->save();
+        }
+     
+        session()->flash('success', 'Berkas berhasil di hapus !');
+        
+        return redirect()->back();
+    }
+    
+    public function daftar_siswa()
+    {
+        $siswa = User::role('User')->paginate(20);
+        $unverified = Berkas::where('photo_status', 'Menunggu Verifikasi')->orWhere('surat_ket_sehat_status', 'Menunggu Verifikasi')->orWhere('payment_status', 'Menunggu Verifikasi')->paginate(20);
+        
+        return view('pages.daftar-siswa', ['siswa' => $siswa, 'unverified' => $unverified]);
+    }
+    
+    public function berkas_invalid(Request $request)
+    {
+        $berkas = Berkas::findOrFail($request->id);
+        
+        $this->validate($request,[
+            'note' => 'required',
+        ]);
+        
+        if($request->type == 'photo') {
+            $berkas->photo_notes = $request->note;
+            $berkas->photo_status = 'Berkas Invalid';
+            $berkas->save();
+        }
+        
+        if($request->type == 'sehat') {
+            $berkas->surat_ket_sehat_notes = $request->note;
+            $berkas->surat_ket_sehat_status = 'Berkas Invalid';
+            $berkas->save();
+        }
+        
+        if($request->type == 'payment') {
+            $berkas->payment_notes = $request->note;
+            $berkas->payment_status = 'Berkas Invalid';
+            $berkas->save();
+        }
+     
+        session()->flash('success', 'Berkas berhasil di kembalikan !');
+        
+        return redirect()->back();
+    }
+    
+    public function berkas_valid($id, $type)
+    {
+        $berkas = Berkas::findOrFail($id);
+        $user = User::findOrFail($berkas->user_id);
+        
+        if($type == 'photo') {
+            $berkas->photo_status = 'Terverifikasi';
+            $berkas->photo_notes = NULL;
+            $berkas->save();
+        }
+        if($type == 'sehat') {
+            $berkas->surat_ket_sehat_status = 'Terverifikasi';
+            $berkas->surat_ket_sehat_notes = NULL;
+            $berkas->save();
+        }
+        if($type == 'payment') {
+            $berkas->payment_status = 'Terverifikasi';
+            $berkas->payment_notes = NULL;
+            $berkas->save();
+        }
+        
+        if($berkas->photo_status == 'Terverifikasi' && $berkas->surat_ket_sehat_status == 'Terverifikasi' && $berkas->payment_status == 'Terverifikasi') {
+            $user->status = 'Ujian';
+            $user->save();
+        }
+        
+        session()->flash('success', 'Berkas berhasil di Verifikasi !');
+        
+        return redirect()->back();
     }
 }

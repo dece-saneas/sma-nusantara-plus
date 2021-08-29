@@ -49,6 +49,12 @@
 						</a>
 					</li>
                     @role('Admin')
+                    <li class="nav-item">
+						<a href="{{ route('daftar.siswa') }}" class="navbar-nav-link {{ HelperMenu::active('route',['daftar.siswa']) }}">
+							<i class="fas fa-users mr-2"></i>
+							Daftar Siswa
+						</a>
+					</li>
                     @endrole
                     @role('User')
 					<li class="nav-item">
@@ -58,13 +64,13 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="@if(Auth::user()->status !== 'Upload') javascript:void(0); @else {{ route('unggah') }} @endif" class="navbar-nav-link @if(Auth::user()->status !== 'Upload') disabled @endif">
+						<a href="@if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) javascript:void(0); @else {{ route('unggah') }} @endif" class="navbar-nav-link {{ HelperMenu::active('route',['unggah']) }} @if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) disabled @endif">
 							<i class="icon-file-upload2 mr-2"></i>
 							Unggah Berkas
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link disabled">
+						<a href="#" class="navbar-nav-link @if(Auth::user()->status !== 'Ujian') disabled @endif">
 							<i class="fas fa-pencil-alt mr-2"></i>
 							Tes Akademik
 						</a>

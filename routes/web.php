@@ -24,6 +24,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Admin
 Route::resource('gelombang','GelombangController')->except(['index', 'show']);
+Route::get('/daftar-siswa','DashboardController@daftar_siswa')->name('daftar.siswa');
+Route::put('/daftar-siswa/','DashboardController@berkas_invalid')->name('berkas.invalid');
+Route::get('/daftar-siswa/valid/{id}/{type}','DashboardController@berkas_valid')->name('berkas.valid');
 
 
 // User
@@ -31,3 +34,5 @@ Route::get('/dashboard/gelombang/{id}', 'DashboardController@select_gelombang')-
 Route::get('/identitas','DashboardController@identitas')->name('identitas');
 Route::put('/identitas/','DashboardController@identitas_update')->name('identitas.update');
 Route::get('/unggah-berkas/','DashboardController@unggah')->name('unggah');
+Route::put('/unggah-berkas/','DashboardController@berkas_update')->name('berkas.update');
+Route::get('/unggah-berkas/{type}','DashboardController@berkas_destroy')->name('berkas.destroy');
