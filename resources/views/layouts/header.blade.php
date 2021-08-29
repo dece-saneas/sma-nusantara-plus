@@ -64,13 +64,13 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="@if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) javascript:void(0); @else {{ route('unggah') }} @endif" class="navbar-nav-link {{ HelperMenu::active('route',['unggah']) }} @if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) disabled @endif">
+						<a href="@if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) javascript:void(0); @else {{ route('berkas') }} @endif" class="navbar-nav-link {{ HelperMenu::active('route',['berkas']) }} @if(Auth::user()->status == 'Isi Identitas' || Auth::user()->gelombang_id == NULL) disabled @endif">
 							<i class="icon-file-upload2 mr-2"></i>
 							Unggah Berkas
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="navbar-nav-link @if(Auth::user()->status !== 'Verified') disabled @endif">
+						<a href="@if(Auth::user()->status !== 'Verified') javascript:void(0); @else {{ route('ujian') }} @endif" class="navbar-nav-link @if(Auth::user()->status !== 'Verified') disabled @endif">
 							<i class="fas fa-pencil-alt mr-2"></i>
 							Tes Akademik
 						</a>

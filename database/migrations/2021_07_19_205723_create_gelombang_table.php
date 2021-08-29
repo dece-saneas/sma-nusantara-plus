@@ -18,6 +18,8 @@ class CreateGelombangTable extends Migration
             $table->string('name');
             $table->dateTime('start_period');
             $table->dateTime('end_period');
+            $table->dateTime('start_exam');
+            $table->dateTime('end_exam');
             $table->string('total_quota');
             $table->string('remaining_quota');
             $table->string('fee');

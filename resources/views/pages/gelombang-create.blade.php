@@ -28,13 +28,33 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="name">Nama Gelombang</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Gelombang I" name="name">
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Gelombang X" name="name">
                                                 @error('name')
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
                                             </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="qty">Kuota</label>
+                                                <input type="number" class="form-control @error('qty') is-invalid @enderror" id="qty" placeholder="0" name="qty">
+                                                @error('qty')
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="fee">Biaya Pendaftaran</label>
+                                                <input type="number" class="form-control @error('fee') is-invalid @enderror" id="fee" placeholder="Rp" name="fee">
+                                                @error('fee')
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="period">Periode</label>
                                                 <div class="input-group">
@@ -51,21 +71,17 @@
                                                 </span>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="qty">Kuota</label>
-                                                <input type="number" class="form-control @error('qty') is-invalid @enderror" id="qty" placeholder="0" name="qty">
-                                                @error('qty')
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="fee">Biaya Pendaftaran</label>
-                                                <input type="number" class="form-control @error('fee') is-invalid @enderror" id="fee" placeholder="0" name="fee">
-                                                @error('fee')
+                                                <label for="exam">Tanggal Ujian</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input id="exam" type="text" class="form-control @error('exam') is-invalid @enderror" placeholder="Pilih Tanggal Ujian" name="exam">
+                                                </div>
+                                                @error('exam')
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

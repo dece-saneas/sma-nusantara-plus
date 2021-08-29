@@ -76,18 +76,13 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                @else
+                                                <tr>
+                                                    <td class="text-center" colspan="7">Belum ada Gelombang</td>
+                                                </tr>
                                                 @endif
                                             </tbody>
                                         </table>
-                                        @if(count($composer['gelombang']) == 0)
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="p-1 text-center" rowspan="2">Belum ada Gelombang</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -105,9 +100,9 @@
                         </div>
                         <div class="card-body">
                             @if(Auth::user()->status == NULL)
-                            <p class="alert alert-primary">Anda belum terdaftar di Gelombang. Silahkan pilih gelombang yang disediakan di bawah ini!</p>
+                            <p class="alert alert-primary">Anda belum terdaftar di gelombang manapun. Silahkan pilih gelombang yang tersedia di bawah ini!</p>
                             @elseif(Auth::user()->status == 'Isi Identitas')
-                            <p class="alert alert-primary">Selamat kamu telah terdaftar di {{ Auth::user()->gelombang->name }}. Silahkan isi Data Identitas!</p>
+                            <p class="alert alert-primary">Selamat kamu telah terdaftar di <strong>{{ Auth::user()->gelombang->name }}</strong>. Silahkan isi Data Identitas!</p>
                             @elseif(Auth::user()->status == 'Upload')
                             <p class="alert alert-primary">Silahkan Unggah berkas yang dibutuhkan!</p>
                             @endif
@@ -147,7 +142,7 @@
                                                         <td class="p-1 text-center">{{ $gelombang->end_period->format('d F Y') }}</td>
                                                         <td class="p-1 text-center">{{ $gelombang->remaining_quota }}</td>
                                                         <td class="p-1 text-center">
-                                                            <a href="{{ route('select.gelombang', $gelombang->id) }}" class="btn btn-sm 
+                                                            <a href="{{ route('gelombang.select', $gelombang->id) }}" class="btn btn-sm 
                                                             @if(Auth::user()->gelombang_id !== NULL)
                                                                 @if(Auth::user()->gelombang_id == $gelombang->id)
                                                                     btn-primary disabled
@@ -165,18 +160,13 @@
                                                         </td>
                                                     </tr>
                                                     @endforeach
+                                                    @else
+                                                    <tr>
+                                                        <td class="text-center" colspan="5">Belum ada Gelombang</td>
+                                                    </tr>
                                                     @endif
                                                 </tbody>
                                             </table>
-                                            @if(count($composer['gelombang']) == 0)
-                                            <table class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="p-1 text-center" rowspan="2">Belum ada Gelombang</th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                            @endif
                                         </form>
                                     </div>
                                 </div>
@@ -206,10 +196,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                    <div class="card card-body @if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Verified') bg-dark @else bg-light @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
+                                    <div class="card card-body @if(Auth::user()->status == 'Upload Berkas' || Auth::user()->status == 'Verified') bg-dark @else bg-light @endif" style="background-image: url(https://ppdb.smktelkom-mlg.sch.id/assets/images/backgrounds/panel_bg.png);">
                                         <div class="media">
                                             <div class="mr-3 align-self-center">
-                                            <i class="@if(Auth::user()->status == 'Upload' || Auth::user()->status == 'Verified') icon-check2 @else icon-cross2 @endif icon-2x"></i>
+                                            <i class="@if(Auth::user()->status == 'Upload Berkas' || Auth::user()->status == 'Verified') icon-check2 @else icon-cross2 @endif icon-2x"></i>
                                             </div>
                                             <div class="media-body text-right">
                                                 <h6 class="media-title font-weight-semibold">Data Identitas</h6>

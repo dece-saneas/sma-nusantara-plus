@@ -52,15 +52,18 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
     <div class="content-wrapper">
         <div class="content">
             <div class="row justify-content-center">
-                <div class="col-xl-8">
+                <div class="col-xl-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-header">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-semua-tab" data-toggle="tab" href="#nav-semua" role="tab" aria-controls="nav-home" aria-selected="true">Semua <span class="badge badge-primary ml-2">{{ count($siswa) }}</span></a>
+                                <a class="nav-item nav-link" id="nav-verified-tab" data-toggle="tab" href="#nav-verified" role="tab" aria-controls="nav-verified" aria-selected="false">Terverifikasi <span class="badge badge-primary ml-2">{{ count($verified) }}</span></a>
                                 <a class="nav-item nav-link" id="nav-menunggu-verifikasi-tab" data-toggle="tab" href="#nav-menunggu-verifikasi" role="tab" aria-controls="nav-menunggu-verifikasi" aria-selected="false">Menunggu Verifikasi <span class="badge badge-primary ml-2">{{ count($unverified) }}</span></a>
                                 </div>
                             </nav>
+                        </div>
+                        <div class="card-body">
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-semua" role="tabpanel" aria-labelledby="nav-semua-tab">
                                     <div class="table-responsive">
@@ -82,8 +85,8 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                     <td class="text-center">{{ $no+1+(($siswa->currentPage()-1)*20) }}</td>
                                                     <td class="text-center">{{ $u->no_registration }}</td>
                                                     <td class="text-center">{{ $u->name }}</td>
-                                                    <td class="text-center">@if($u->status == 'Isi Identitas') <span class="badge badge-pill badge-light px-2">Belum di Isi</span> @else {{ $u->identitas->nama_sekolah }} @endif</td>
-                                                    <td class="text-center"><span class="badge @if($u->status == 'Verified') badge-primary @else badge-light @endif">{{ $u->status }}</span></td>
+                                                    <td class="text-center">@if($u->status == 'Isi Identitas' || $u->status == NULL) <span class="badge badge-pill badge-light px-2">Belum di Isi</span> @else {{ $u->identitas->nama_sekolah }} @endif</td>
+                                                    <td class="text-center"><span class="badge @if($u->status == 'Verified') badge-primary @else badge-light @endif">@if($u->status == NULL) Pilih Gelombang @else {{ $u->status }} @endif</span></td>
                                                     <td class="text-center"><button class="btn btn-primary btn-sm"><i class="fas fa-print mr-2"></i>Print</button></td>
                                                 </tr>
                                                 @endforeach
@@ -155,7 +158,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                 @endforeach
                                                 @else
                                                 <tr>
-                                                    <td colspan="7" class="text-center">Belum ada berkas</td>
+                                                    <td colspan="7" class="text-center">Belum ada permintaan verifikasi</td>
                                                 </tr>
                                                 @endif
                                             </tbody>
@@ -163,6 +166,43 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                     </div>
                                     <div class="mt-2">
                                     {{ $unverified->links('layouts.pagination') }}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-verified" role="tabpanel" aria-labelledby="nav-verified-tab">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="p-1 text-center">No</th>
+                                                    <th class="p-1 text-center">No Pendaftaran</th>
+                                                    <th class="text-center">Nama Lengkap</th>
+                                                    <th class="text-center">Asal Sekolah</th>
+                                                    <th class="text-center" rowspan="2">Status</th>
+                                                    <th rowspan="2" class="text-center"><i class="icon-more2"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(count($verified) > 0)
+                                                @foreach($verified as $no => $u)
+                                                <tr>
+                                                    <td class="text-center">{{ $no+1+(($verified->currentPage()-1)*20) }}</td>
+                                                    <td class="text-center">{{ $u->no_registration }}</td>
+                                                    <td class="text-center">{{ $u->name }}</td>
+                                                    <td class="text-center">@if($u->status == 'Isi Identitas') <span class="badge badge-pill badge-light px-2">Belum di Isi</span> @else {{ $u->identitas->nama_sekolah }} @endif</td>
+                                                    <td class="text-center"><span class="badge @if($u->status == 'Verified') badge-primary @else badge-light @endif">{{ $u->status }}</span></td>
+                                                    <td class="text-center"><button class="btn btn-primary btn-sm"><i class="fas fa-print mr-2"></i>Print</button></td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="7" class="text-center">Belum ada siswa yang Terverifikasi</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="mt-2">
+                                    {{ $verified->links('layouts.pagination') }}
                                     </div>
                                 </div>
                             </div>

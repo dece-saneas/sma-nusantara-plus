@@ -13,21 +13,13 @@ use App\Models\Berkas;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(['auth','verified']);
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    
+// ---------------------------------------------------------------------------------------------------------------------------------------------- DASHBOARD
+    
     public function index()
     {
         $user = User::findOrFail(Auth::id());
@@ -47,90 +39,59 @@ class DashboardController extends Controller
         return view('dashboard');
     }
     
-    public function select_gelombang($id)
-    {
-        $user = User::findOrFail(Auth::id());
-        $gelombang = Gelombang::findOrFail($id);
+    public function gelombang_select($id)
+    { if( Auth::user()->hasRole('Admin') ) abort(404);
+        $user = User::findOrFail( Auth::id() );
         
         $user->gelombang_id = $id;
         $user->status = 'Isi Identitas';
         $user->save();
         
-        if(empty(Identitas::where('user_id', Auth::id()))) {
-            $identitas = Identitas::create([ 'user_id' =>  Auth::id() ]);        
-            $keluarga = Keluarga::create([ 'user_id' =>  Auth::id() ]);
-            $berkas = Berkas::create([ 
-                'user_id' =>  Auth::id(),
-                'photo_status' => 'Belum di Upload',
-                'surat_ket_sehat_status' => 'Belum di Upload',
-                'payment_status' => 'Belum di Upload',
-            ]);
+        if( empty( Identitas::where( 'user_id', Auth::id() )->first() ) ) {
+            $identitas = Identitas::create([ 'user_id' => Auth::id() ]);        
+            $keluarga = Keluarga::create([ 'user_id' => Auth::id() ]);
+            $berkas = Berkas::create([ 'user_id' => Auth::id()] );
         }
 		
         return redirect()->route('dashboard');
     }
     
+// ---------------------------------------------------------------------------------------------------------------------------------------------- ISI IDENTITAS
+    
     public function identitas()
-    { if(Auth::user()->gelombang_id == NULL) abort(404);
-        $identitas = Identitas::where('user_id', Auth::id())->first();
-        $keluarga = Keluarga::where('user_id', Auth::id())->first();
+    { if( Auth::user()->hasRole('Admin') || Auth::user()->gelombang_id == NULL) abort(404);
+        $identitas = Identitas::where( 'user_id', Auth::id() )->first();
+        $keluarga = Keluarga::where( 'user_id', Auth::id() )->first();
         $countries = Country::orderBy('langEN', 'ASC')->get();
         
-        return view('pages.identitas', ['identitas' => $identitas, 'keluarga' => $keluarga, 'countries' => $countries]);
+        return view('pages.data-identitas', [ 'identitas' => $identitas, 'keluarga' => $keluarga, 'countries' => $countries ]);
     }
     
     public function identitas_update(Request $request)
-    {        
-        $user = User::findOrFail(Auth::id());
-        $identitas = Identitas::where('user_id', Auth::id())->first();
-        $keluarga = Keluarga::where('user_id', Auth::id())->first();
-        
+    { if( Auth::user()->hasRole('Admin') || Auth::user()->gelombang_id == NULL) abort(404);
         $this->validate($request,[
-            // calon siswa
-            'name' => 'required',
-            'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'agama' => 'required',
-            'kewarganegaraan' => 'required',
-            'status' => 'required',
-            'anak_ke' => 'required',
-            'keadaan_ayah' => 'required',
-            'keadaan_ibu' => 'required',
+            // calon siswa                              // tempat tinggal
+            'name' => 'required',                       'alamat' => 'required',
+            'jenis_kelamin' => 'required',              'kelurahan' => 'required',
+            'tempat_lahir' => 'required',               'kecamatan' => 'required',
+            'tanggal_lahir' => 'required',              'kota' => 'required',
+            'agama' => 'required',                      'provinsi' => 'required',
+            'kewarganegaraan' => 'required',            'kode_pos' => 'required',
+            'status' => 'required',                     'negara' => 'required',
+            'anak_ke' => 'required',                    'no_handphone' => 'required',
+            'keadaan_ayah' => 'required',               'tinggal_dengan' => 'required',
+            'keadaan_ibu' => 'required',                'kesekolah_dengan' => 'required',
             
-            // tempat tinggal
-            'alamat' => 'required',
-            'kelurahan' => 'required',
-            'kecamatan' => 'required',
-            'kota' => 'required',
-            'provinsi' => 'required',
-            'kode_pos' => 'required',
-            'negara' => 'required',
-            'no_handphone' => 'required',
-            'tinggal_dengan' => 'required',
-            'kesekolah_dengan' => 'required',
-            
-            // kesehatan
-            'gol_darah' => 'required',
-            'tinggi' => 'required',
-            'berat' => 'required',
-            
-            // pendidikan
-            'nama_sekolah' => 'required',
-            'alamat_sekolah' => 'required',
-            'no_sttb' => 'required',
-            'lama_belajar' => 'required',
-            
-            // wali kandung
-            'nama_wali' => 'required',
-            'tempat_lahir_wali' => 'required',
-            'tanggal_lahir_wali' => 'required',
+            // wali kandung                             // kesehatan
+            'nama_wali' => 'required',                  'gol_darah' => 'required',
+            'tempat_lahir_wali' => 'required',          'tinggi' => 'required',
+            'tanggal_lahir_wali' => 'required',         'berat' => 'required',
             'agama_wali' => 'required',
-            'kewarganegaraan_wali' => 'required',
-            'pendidikan_wali' => 'required',
-            'pekerjaan_wali' => 'required',
-            'penghasilan_wali' => 'required',
-            'alamat_wali' => 'required',
+            'kewarganegaraan_wali' => 'required',       // pendidikan
+            'pendidikan_wali' => 'required',            'nama_sekolah' => 'required',
+            'pekerjaan_wali' => 'required',             'alamat_sekolah' => 'required',
+            'penghasilan_wali' => 'required',           'no_sttb' => 'required',
+            'alamat_wali' => 'required',                'lama_belajar' => 'required',
             'kelurahan_wali' => 'required',
             'kecamatan_wali' => 'required',
             'kota_wali' => 'required',
@@ -139,6 +100,10 @@ class DashboardController extends Controller
             'negara_wali' => 'required',
             'no_handphone_wali' => 'required',
         ]);
+        
+        $user = User::findOrFail(Auth::id());
+        $identitas = Identitas::where('user_id', Auth::id())->first();
+        $keluarga = Keluarga::where('user_id', Auth::id())->first();
         
         if($request->keadaan_ayah == 'Masih Ada') {
             $this->validate($request,[
@@ -313,7 +278,7 @@ class DashboardController extends Controller
         $keluarga->save();
         
         if($user->status == 'Isi Identitas') {
-            $user->status = 'Upload';
+            $user->status = 'Upload Berkas';
             $user->save();
         }
         
@@ -321,18 +286,20 @@ class DashboardController extends Controller
         
         return redirect()->back();
     }
+   
+// ---------------------------------------------------------------------------------------------------------------------------------------------- UNGGAH BERKAS
     
-    public function unggah()
-    { if(Auth::user()->gelombang_id == NULL) abort(404);
+    public function berkas()
+    { if( Auth::user()->hasRole('Admin') || Auth::user()->gelombang_id == NULL) abort(404);
         
-        $berkas = Berkas::where('user_id', Auth::id())->first();
+        $berkas = Berkas::where( 'user_id', Auth::id() )->first();
         $gelombang = Gelombang::findOrFail(Auth::user()->gelombang_id);
      
         return view('pages.unggah-berkas', ['berkas' => $berkas, 'gelombang' => $gelombang]);
     }
     
     public function berkas_update(Request $request)
-    { if(Auth::user()->gelombang_id == NULL) abort(404);
+    { if( Auth::user()->hasRole('Admin') || Auth::user()->gelombang_id == NULL) abort(404);
         $berkas = Berkas::where('user_id', Auth::id())->first();
      
         if($request->hasFile('photo')){
@@ -384,9 +351,9 @@ class DashboardController extends Controller
         
         return redirect()->back();
     }
-    
+
     public function berkas_destroy($type)
-    { if(Auth::user()->gelombang_id == NULL) abort(404);
+    { if( Auth::user()->hasRole('Admin') || Auth::user()->gelombang_id == NULL) abort(404);
         
         $berkas = Berkas::where('user_id', Auth::id())->first();
      
@@ -419,16 +386,21 @@ class DashboardController extends Controller
         return redirect()->back();
     }
     
+// ---------------------------------------------------------------------------------------------------------------------------------------------- DAFTAR SISWA
+    
     public function daftar_siswa()
-    {
+    { if( Auth::user()->hasRole('User') ) abort(404);
         $siswa = User::role('User')->paginate(20);
-        $unverified = Berkas::where('photo_status', 'Menunggu Verifikasi')->orWhere('surat_ket_sehat_status', 'Menunggu Verifikasi')->orWhere('payment_status', 'Menunggu Verifikasi')->paginate(20);
+        $verified = User::where('status', 'Verified')->paginate(20);
+        $unverified = Berkas::where('photo_status', 'Menunggu Verifikasi')
+                            ->orWhere('surat_ket_sehat_status', 'Menunggu Verifikasi')
+                            ->orWhere('payment_status', 'Menunggu Verifikasi')->paginate(20);
         
-        return view('pages.daftar-siswa', ['siswa' => $siswa, 'unverified' => $unverified]);
+        return view('pages.daftar-siswa', ['siswa' => $siswa, 'unverified' => $unverified, 'verified' => $verified]);
     }
     
     public function berkas_invalid(Request $request)
-    {
+    { if( Auth::user()->hasRole('User') ) abort(404);
         $berkas = Berkas::findOrFail($request->id);
         
         $this->validate($request,[
@@ -459,9 +431,10 @@ class DashboardController extends Controller
     }
     
     public function berkas_valid($id, $type)
-    {
+    { if( Auth::user()->hasRole('User') ) abort(404);
         $berkas = Berkas::findOrFail($id);
         $user = User::findOrFail($berkas->user_id);
+        $gelombang = Gelombang::findOrFail($user->gelombang_id)->first();
         
         if($type == 'photo') {
             $berkas->photo_status = 'Terverifikasi';
@@ -480,12 +453,23 @@ class DashboardController extends Controller
         }
         
         if($berkas->photo_status == 'Terverifikasi' && $berkas->surat_ket_sehat_status == 'Terverifikasi' && $berkas->payment_status == 'Terverifikasi') {
+            
             $user->status = 'Verified';
             $user->save();
+            
+            $gelombang->remaining_quota = $gelombang->remaining_quota-1;
+            $gelombang->save();
         }
         
         session()->flash('success', 'Berkas berhasil di Verifikasi !');
         
         return redirect()->back();
+    }
+    
+// ---------------------------------------------------------------------------------------------------------------------------------------------- TES AKADEMIK
+    
+    public function ujian()
+    {
+        return view('pages.tes-akademik');
     }
 }

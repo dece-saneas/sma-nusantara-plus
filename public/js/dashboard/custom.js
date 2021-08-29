@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 // Daterangepicker
 $(document).ready(function(){
+    
     $('#period').daterangepicker({
         timePicker: true,
         timePicker24Hour: true,
@@ -26,7 +27,15 @@ $(document).ready(function(){
         }
     })
     
-    $('#period').val('');
+    $('#exam').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        drops: 'auto',
+        locale: {
+            format: 'DD MMMM Y - HH:mm',
+            separator: ' s/d ',
+        }
+    })
 });
 
 // Daterangepicker
