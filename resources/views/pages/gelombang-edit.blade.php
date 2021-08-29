@@ -84,7 +84,7 @@ $("#period").each(function() {
                                                             <i class="far fa-calendar-alt"></i>
                                                         </span>
                                                     </div>
-                                                    <input id="exam" type="text" class="form-control @error('exam') is-invalid @enderror" placeholder="Pilih Tanggal Ujian" name="exam" value="{{ $gelombang->start_exam->format('d F Y') }} s/d {{ $gelombang->end_exam->format('d F Y') }}">
+                                                    <input id="exam" type="text" class="form-control @error('exam') is-invalid @enderror" placeholder="Pilih Tanggal Ujian" name="exam" value="{{ $gelombang->start_exam->format('d F Y - H:i:s') }} s/d {{ $gelombang->end_exam->format('d F Y - H:i:s') }}">
                                                 </div>
                                                 @error('exam')
                                                 <span class="invalid-feedback">

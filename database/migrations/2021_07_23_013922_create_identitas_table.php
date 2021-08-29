@@ -37,7 +37,7 @@ class CreateIdentitasTable extends Migration
             $table->string('no_handphone',15)->nullable();
             $table->string('tinggal_dengan',25)->nullable();
             $table->string('jarak_ke_sekolah',15)->nullable();
-            $table->string('kesekolah_dengan',15)->nullable();
+            $table->string('kesekolah_dengan',20)->nullable();
             
             $table->string('gol_darah',5)->nullable();
             $table->string('penyakit',25)->nullable();

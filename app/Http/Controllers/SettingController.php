@@ -30,13 +30,15 @@ class SettingController extends Controller
         
         $period = (explode(" s/d ",$request->period));
         $exam = (explode(" s/d ",$request->exam));
-        
+        $exam_start = (explode(" - ",$exam[0]));
+        $exam_end = (explode(" - ",$exam[1]));
+            
         $gelombang = Gelombang::create([
             'name' =>  $request['name'],
             'start_period' =>  date("Y-m-d H:i:s", strtotime($period[0])),
             'end_period' =>  date("Y-m-d H:i:s", strtotime($period[1])),
-            'start_exam' =>  date("Y-m-d H:i:s", strtotime($exam[0])),
-            'end_exam' =>  date("Y-m-d H:i:s", strtotime($exam[1])),
+            'start_exam' =>  date("Y-m-d", strtotime($exam_start[0])).' '.date("H:i:s", strtotime($exam_start[1])),
+            'end_exam' =>  date("Y-m-d", strtotime($exam_end[0])).' '.date("H:i:s", strtotime($exam_end[1])),
             'total_quota' =>  $request['qty'],
             'remaining_quota' =>  $request['qty'],
             'fee' =>  $request['fee'],
@@ -67,12 +69,14 @@ class SettingController extends Controller
         
         $period = (explode(" s/d ",$request->period));
         $exam = (explode(" s/d ",$request->exam));
+        $exam_start = (explode(" - ",$exam[0]));
+        $exam_end = (explode(" - ",$exam[1]));
         
         $gelombang->name = $request->name;
         $gelombang->start_period = date("Y-m-d H:i:s", strtotime($period[0]));
         $gelombang->end_period = date("Y-m-d H:i:s", strtotime($period[1]));
-        $gelombang->start_exam = date("Y-m-d H:i:s", strtotime($exam[0]));
-        $gelombang->end_exam = date("Y-m-d H:i:s", strtotime($exam[1]));
+        $gelombang->start_exam = date("Y-m-d", strtotime($exam_start[0])).' '.date("H:i:s", strtotime($exam_start[1]));
+        $gelombang->end_exam = date("Y-m-d", strtotime($exam_end[0])).' '.date("H:i:s", strtotime($exam_end[1]));
         $gelombang->remaining_quota = $request->qty-($gelombang->total_quota-$gelombang->remaining_quota);
         $gelombang->total_quota = $request->qty;
         $gelombang->fee = $request->fee;

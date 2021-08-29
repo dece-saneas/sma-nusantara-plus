@@ -57,15 +57,15 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                         <div class="card-header">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-semua-tab" data-toggle="tab" href="#nav-semua" role="tab" aria-controls="nav-home" aria-selected="true">Semua <span class="badge badge-primary ml-2">{{ count($siswa) }}</span></a>
-                                <a class="nav-item nav-link" id="nav-verified-tab" data-toggle="tab" href="#nav-verified" role="tab" aria-controls="nav-verified" aria-selected="false">Terverifikasi <span class="badge badge-primary ml-2">{{ count($verified) }}</span></a>
-                                <a class="nav-item nav-link" id="nav-menunggu-verifikasi-tab" data-toggle="tab" href="#nav-menunggu-verifikasi" role="tab" aria-controls="nav-menunggu-verifikasi" aria-selected="false">Menunggu Verifikasi <span class="badge badge-primary ml-2">{{ count($unverified) }}</span></a>
+                                    <a class="nav-item nav-link active" id="nav-menunggu-verifikasi-tab" data-toggle="tab" href="#nav-menunggu-verifikasi" role="tab" aria-controls="nav-menunggu-verifikasi" aria-selected="false">Menunggu Verifikasi <span class="badge badge-primary ml-2">{{ count($unverified) }}</span></a>
+                                    <a class="nav-item nav-link" id="nav-semua-tab" data-toggle="tab" href="#nav-semua" role="tab" aria-controls="nav-home" aria-selected="true">Semua <span class="badge badge-primary ml-2">{{ count($siswa) }}</span></a>
+                                    <a class="nav-item nav-link" id="nav-verified-tab" data-toggle="tab" href="#nav-verified" role="tab" aria-controls="nav-verified" aria-selected="false">Terverifikasi <span class="badge badge-primary ml-2">{{ count($verified) }}</span></a>
                                 </div>
                             </nav>
                         </div>
                         <div class="card-body">
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-semua" role="tabpanel" aria-labelledby="nav-semua-tab">
+                                <div class="tab-pane fade" id="nav-semua" role="tabpanel" aria-labelledby="nav-semua-tab">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -102,7 +102,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                     {{ $siswa->links('layouts.pagination') }}
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-menunggu-verifikasi" role="tabpanel" aria-labelledby="nav-menunggu-verifikasi-tab">
+                                <div class="tab-pane fade show active" id="nav-menunggu-verifikasi" role="tabpanel" aria-labelledby="nav-menunggu-verifikasi-tab">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped">
                                             <thead>
