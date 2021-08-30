@@ -47,3 +47,5 @@ Route::get('/unggah-berkas/','DashboardController@berkas')->name('berkas');
 Route::put('/unggah-berkas/','DashboardController@berkas_update')->name('berkas.update');
 Route::get('/unggah-berkas/{type}','DashboardController@berkas_destroy')->name('berkas.destroy');
 Route::get('/tes-akademik','DashboardController@ujian')->name('ujian');
+Route::get('/tes-akademik/soal','DashboardController@ujian_soal')->name('ujian.soal');
+Route::put('/tes-akademik/submit','DashboardController@ujian_submit')->name('ujian.submit');

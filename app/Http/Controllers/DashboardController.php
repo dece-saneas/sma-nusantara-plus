@@ -10,6 +10,8 @@ use App\Models\Keluarga;
 use App\Models\User;
 use App\Models\Country;
 use App\Models\Berkas;
+use App\Models\Soal;
+use App\Models\Jawaban;
 
 class DashboardController extends Controller
 {
@@ -469,7 +471,66 @@ class DashboardController extends Controller
 // ---------------------------------------------------------------------------------------------------------------------------------------------- TES AKADEMIK
     
     public function ujian()
-    {
-        return view('pages.tes-akademik');
+    { if( Auth::user()->status !== 'Verified' ) abort(404);
+     
+        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+        return view('pages.tes-akademik', ['jawaban' => $jawaban]);
+    }
+    
+    public function ujian_soal()
+    { if( Auth::user()->status !== 'Verified' ) abort(404);
+        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+        if($jawaban) {
+            if($jawaban->bhs !== NULL) abort(404);
+        }
+     
+        if( empty( Jawaban::where( 'user_id', Auth::id() )->first() ) ) {
+            $jawaban = Jawaban::create([ 'user_id' => Auth::id() ]);
+        }
+        
+        $soal = Soal::inRandomOrder()->get();
+        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+                                  
+        return view('pages.tes-akademik-soal', ['soal' => $soal, 'jawaban' => $jawaban]);
+    }
+    
+    public function ujian_submit(Request $request)
+    { if( Auth::user()->status !== 'Verified') abort(404);
+        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+        if($jawaban) {
+            if($jawaban->bhs !== NULL) abort(404);
+        }
+     
+        $soal = Soal::all();
+        $jawaban = $request->jawaban;
+        
+        $BHS = 0; $BHStotal = count(Soal::where('category', 'BHS')->get());
+        $ING = 0; $INGtotal = count(Soal::where('category', 'ING')->get());
+        $MTK = 0; $MTKtotal = count(Soal::where('category', 'MTK')->get());
+        $IPA = 0; $IPAtotal = count(Soal::where('category', 'IPA')->get());
+     
+        foreach($soal as $s) {
+            if(!empty($jawaban[$s->id])) {
+                $pilih = $jawaban[$s->id];
+                
+                if($pilih == $s->key) {
+                    if($s->category == 'BHS') $BHS++;
+                    if($s->category == 'ING') $ING++;
+                    if($s->category == 'MTK') $MTK++;
+                    if($s->category == 'IPA') $IPA++;
+                }
+            }
+        }
+        
+        $hasil = Jawaban::where( 'user_id', Auth::id() )->first();
+        $hasil->bhs = $BHS.'/'.$BHStotal;
+        $hasil->ing = $ING.'/'.$INGtotal;
+        $hasil->mtk = $MTK.'/'.$MTKtotal;
+        $hasil->ipa = $IPA.'/'.$IPAtotal;
+        $hasil->save();
+     
+        session()->flash('success', 'Ujian berakhir !');
+     
+        return redirect()->route('ujian');
     }
 }

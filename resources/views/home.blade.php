@@ -329,7 +329,9 @@
                             </div>
                             <div class="card-body">
                                 <h6 class="font-weight-bold">Periode Gelombang</b></h6>
-                                {{ $composer['gelombang_now']->start_period->format('d M Y') }} - {{ $composer['gelombang_now']->end_period->format('d M Y') }}
+                                {{ $composer['gelombang_now']->start_period->format('d F Y') }} - {{ $composer['gelombang_now']->end_period->format('d F Y') }}
+                                <h6 class="font-weight-bold">Jadwal Ujian</b></h6>
+                                {{ $composer['gelombang_now']->start_exam->format('d F Y') }} - {{ $composer['gelombang_now']->end_exam->format('d F Y') }}
                             </div>
                         </div>
                     </div>
