@@ -14,7 +14,7 @@
 				<ul class="navbar-nav ml-md-auto">
 					<li class="nav-item dropdown dropdown-user">
 						<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-							    <img src="@role('User') @if($composer['berkas']) {{ asset('img/berkas/'.$composer['berkas']['photo']) }} @endif @endrole" onerror="this.onerror=null;this.src='{{ asset('img/placeholders/user.jpg') }}';" class="rounded-circle mr-2" alt="" height="34">
+							    <img src="@role('User') @if($composer['berkas']) {{ asset('img/berkas/AVA'.$composer['berkas']['photo']) }} @endif @endrole" onerror="this.onerror=null;this.src='{{ asset('img/placeholders/user.jpg') }}';" class="rounded-circle mr-2" alt="" height="34">
 							<span>{{ Auth::user()->name }} @role('User')| <strong>{{ Auth::user()->no_registration }}</strong>@endrole</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">

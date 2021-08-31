@@ -314,6 +314,18 @@ class DashboardController extends Controller
             $photo_filename =  Auth::user()->no_registration.'-photo'.'.'.$photo->getClientOriginalExtension();
             Image::make($photo)->save(public_path('img/berkas/'.$photo_filename));
             
+            $img = Image::make('img/berkas/'.$photo_filename);
+            $square = 0;
+            $width = $img->width();
+            $height = $img->height();
+            if($width > $height){
+                $square = $height;
+            }else {
+                $square = $width;
+            }
+            $img->crop($width, $width);
+            Image::make($img)->save(public_path('img/berkas/AVA'.$photo_filename));
+            
             $berkas->photo =  $photo_filename;
             $berkas->photo_status = 'Menunggu Verifikasi';
             $berkas->save();
