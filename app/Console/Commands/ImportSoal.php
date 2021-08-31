@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\SoalImport;
 
-class ImportSQL extends Command
+class ImportSoal extends Command
 {
     /**
      * The name and signature of the console command.
