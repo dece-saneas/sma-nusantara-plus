@@ -18,7 +18,7 @@
 							<span>{{ Auth::user()->name }} @role('User')| <strong>{{ Auth::user()->no_registration }}</strong>@endrole</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="#" class="dropdown-item"><i class="icon-key"></i> Ubah Kata Sandi</a>
+							<a href="#" class="dropdown-item" data-toggle="modal" data-target="#ResetPasswordModal"><i class="icon-key"></i> Ubah Kata Sandi</a>
 							<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item"><i class="icon-switch2"></i> Keluar</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

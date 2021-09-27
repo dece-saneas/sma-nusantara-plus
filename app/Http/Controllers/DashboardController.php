@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth, Image, File, PDF;
+use Auth, Image, File, PDF, Hash;
 use App\Models\Gelombang;
 use App\Models\Identitas;
 use App\Models\Keluarga;
@@ -571,5 +571,21 @@ class DashboardController extends Controller
         }else {
             abort(404);
         }
+    }
+    
+    public function resetPassword(Request $request)
+    {
+        $user = User::FindOrFail(Auth::id());
+        
+        $this->validate($request,[
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        
+        session()->flash('success', 'Password Berhasil di Ubah !');
+        
+        return redirect()->back();
     }
 }

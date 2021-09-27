@@ -51,3 +51,5 @@ Route::get('/tes-akademik/soal','DashboardController@ujian_soal')->name('ujian.s
 Route::put('/tes-akademik/submit','DashboardController@ujian_submit')->name('ujian.submit');
 
 Route::get('dashboard/download/kartu-wawancara','DashboardController@download_wawancara')->name('download.wawancara');
+
+Route::post('reset-password','DashboardController@resetPassword')->name('custom.resetpassword');
