@@ -38,10 +38,20 @@ $(document).ready(function(){
     })
 });
 
-// Daterangepicker
+// Datepicker
 $(document).ready(function(){
     $('.datepicker').datetimepicker({
         format: "L",
+    })
+});
+
+
+// Datetimepicker
+$(document).ready(function(){
+    $('.datetimepicker').datetimepicker({
+        icons: {
+            time: 'fas fa-clock'
+        }
     })
 });
 

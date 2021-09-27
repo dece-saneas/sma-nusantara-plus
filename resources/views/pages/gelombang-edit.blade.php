@@ -93,6 +93,29 @@ $("#period").each(function() {
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="period">Jadwal Wawancara</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control datetimepicker-input datetimepicker @error('wawancara') is-invalid @enderror" data-toggle="datetimepicker" data-target="#wawancara" id="wawancara" name="wawancara" value="@if($gelombang->wawancara !== NULL) {{ $gelombang->wawancara->format('m/d/Y h:i A') }} @else {{ old('wawancara') }} @endif">
+                                                    @error('wawancara')
+                                                    <span class="invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                @error('period')
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Simpan</button>
                                         </div>

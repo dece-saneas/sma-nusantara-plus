@@ -335,3 +335,20 @@ input[type=number] {
     height: 60px;
     padding: 1.05rem;
 }
+
+.nilai {
+    border-radius: 50%;
+    border: solid .2em red;
+    width: 120px;
+    height: 120px;
+    padding-top: .2em;
+    margin: auto;
+    font-size: 36pt;
+    font-weight: bolder;
+    color: red;
+}
+
+.nilai.success {
+    border: solid .2em #2196F3 !important;
+    color: #2196F3;
+}

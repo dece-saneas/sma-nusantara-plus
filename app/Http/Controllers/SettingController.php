@@ -31,14 +31,15 @@ class SettingController extends Controller
         $period = (explode(" s/d ",$request->period));
         $exam = (explode(" s/d ",$request->exam));
         $exam_start = (explode(" - ",$exam[0]));
-        $exam_end = (explode(" - ",$exam[1]));
-            
+        $exam_end = (explode(" - ",$exam[1]));        
+        
         $gelombang = Gelombang::create([
             'name' =>  $request['name'],
             'start_period' =>  date("Y-m-d H:i:s", strtotime($period[0])),
             'end_period' =>  date("Y-m-d H:i:s", strtotime($period[1])),
             'start_exam' =>  date("Y-m-d", strtotime($exam_start[0])).' '.date("H:i:s", strtotime($exam_start[1])),
             'end_exam' =>  date("Y-m-d", strtotime($exam_end[0])).' '.date("H:i:s", strtotime($exam_end[1])),
+            'wawancara' => date("Y-m-d H:i:s", strtotime($request->wawancara)),
             'total_quota' =>  $request['qty'],
             'remaining_quota' =>  $request['qty'],
             'fee' =>  $request['fee'],
@@ -71,6 +72,11 @@ class SettingController extends Controller
         $exam = (explode(" s/d ",$request->exam));
         $exam_start = (explode(" - ",$exam[0]));
         $exam_end = (explode(" - ",$exam[1]));
+        
+        if($request->wawancara) {
+            $gelombang->wawancara = date("Y-m-d H:i:s", strtotime($request->wawancara));
+            $gelombang->save();
+        }
         
         $gelombang->name = $request->name;
         $gelombang->start_period = date("Y-m-d H:i:s", strtotime($period[0]));

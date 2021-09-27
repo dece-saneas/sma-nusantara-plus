@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth, Image, File;
+use Auth, Image, File, PDF;
 use App\Models\Gelombang;
 use App\Models\Identitas;
 use App\Models\Keluarga;
@@ -544,5 +544,32 @@ class DashboardController extends Controller
         session()->flash('success', 'Ujian berakhir !');
      
         return redirect()->route('ujian');
+    }
+    
+    public function download_wawancara()
+    {
+        $jawaban = Jawaban::where('user_id', Auth::id())->first();
+        
+        if($jawaban) {
+            $n_bhs= explode("/",Auth::user()->jawaban->bhs);
+            $n_ing = explode("/",Auth::user()->jawaban->ing);
+            $n_ipa = explode("/",Auth::user()->jawaban->ipa);
+            $n_mtk = explode("/",Auth::user()->jawaban->mtk);
+            
+            $j = $n_bhs[0]+$n_ing[0]+$n_mtk[0]+$n_ipa[0];
+            $s = $n_bhs[1]+$n_ing[1]+$n_mtk[1]+$n_ipa[1];
+            $n = number_format((($j/$s)*100), 0);
+            
+            if($n >= 65) {
+                $pdf = PDF::loadview('pdf.kartu_wawancara')->setPaper('a4', 'potrait');
+                $pdf->setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+
+                return $pdf->stream('Kartu Wawancara.pdf');
+            }else {
+                abort(404);
+            }
+        }else {
+            abort(404);
+        }
     }
 }

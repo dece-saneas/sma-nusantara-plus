@@ -49,3 +49,5 @@ Route::get('/unggah-berkas/{type}','DashboardController@berkas_destroy')->name('
 Route::get('/tes-akademik','DashboardController@ujian')->name('ujian');
 Route::get('/tes-akademik/soal','DashboardController@ujian_soal')->name('ujian.soal');
 Route::put('/tes-akademik/submit','DashboardController@ujian_submit')->name('ujian.submit');
+
+Route::get('dashboard/download/kartu-wawancara','DashboardController@download_wawancara')->name('download.wawancara');

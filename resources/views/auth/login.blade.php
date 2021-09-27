@@ -21,7 +21,7 @@
                 <div class="card mb-0">
                     <ul class="nav nav-tabs nav-justified alpha-grey mb-0">
                         <li class="nav-item"><a href="{{ route('login') }}" id="tab1" class="nav-link border-y-0 border-left-0 active"><h6 class="my-1">Masuk</h6></a></li>
-                        <li class="nav-item"><a href="{{ route('register') }}" id="tab2" class="nav-link border-y-0 border-right-0"><h6 class="my-1">Daftar</h6></a></li>
+                        <li class="nav-item"><a href=" @if($composer['gelombang_now']) {{ route('register') }} @else javascript:void(0); @endif" id="tab2" class="nav-link border-y-0 border-right-0"><h6 class="my-1">Daftar</h6></a></li>
                     </ul>
                     <div class="tab-content card-body">
                         <div class="tab-pane fade show active" id="login-tab1">

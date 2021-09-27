@@ -14,10 +14,10 @@ class Gelombang extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'start_period', 'end_period', 'start_exam', 'end_exam', 'total_quota', 'remaining_quota', 'fee',
+        'name', 'start_period', 'wawancara', 'end_period', 'start_exam', 'end_exam', 'total_quota', 'remaining_quota', 'fee',
     ];
     
-    protected $dates = ['start_period', 'end_period', 'start_exam', 'end_exam'];
+    protected $dates = ['start_period', 'end_period', 'start_exam', 'end_exam', 'wawancara'];
     
     public function user()
     {
