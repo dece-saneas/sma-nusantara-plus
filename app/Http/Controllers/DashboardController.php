@@ -483,71 +483,85 @@ class DashboardController extends Controller
 // ---------------------------------------------------------------------------------------------------------------------------------------------- TES AKADEMIK
     
     public function ujian()
-    { if( Auth::user()->status !== 'Verified' ) abort(404);
+    { 
+        if( Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete' ) {
      
-        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
-        return view('pages.tes-akademik', ['jawaban' => $jawaban]);
+            $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+            return view('pages.tes-akademik', ['jawaban' => $jawaban]);
+        }else {
+           abort(404); 
+        }
     }
     
     public function ujian_soal()
-    { if( Auth::user()->status !== 'Verified' ) abort(404);
-        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
-        if($jawaban) {
-            if($jawaban->bhs !== NULL) abort(404);
+    { 
+        if( Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete' ) {
+            
+            $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+            if($jawaban) {
+                if($jawaban->bhs !== NULL) abort(404);
+            }
+
+            if( empty( Jawaban::where( 'user_id', Auth::id() )->first() ) ) {
+                $jawaban = Jawaban::create([ 'user_id' => Auth::id() ]);
+            }
+
+            $soal = Soal::inRandomOrder()->get();
+            $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+
+            return view('pages.tes-akademik-soal', ['soal' => $soal, 'jawaban' => $jawaban]);
+        }else {
+           abort(404); 
         }
-     
-        if( empty( Jawaban::where( 'user_id', Auth::id() )->first() ) ) {
-            $jawaban = Jawaban::create([ 'user_id' => Auth::id() ]);
-        }
-        
-        $soal = Soal::inRandomOrder()->get();
-        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
-                                  
-        return view('pages.tes-akademik-soal', ['soal' => $soal, 'jawaban' => $jawaban]);
     }
     
     public function ujian_submit(Request $request)
-    { if( Auth::user()->status !== 'Verified') abort(404);
-        $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
-        if($jawaban) {
-            if($jawaban->bhs !== NULL) abort(404);
-        }
-     
-        $soal = Soal::all();
-        $jawaban = $request->jawaban;
-        
-        $BHS = 0; $BHStotal = count(Soal::where('category', 'BHS')->get());
-        $ING = 0; $INGtotal = count(Soal::where('category', 'ING')->get());
-        $MTK = 0; $MTKtotal = count(Soal::where('category', 'MTK')->get());
-        $IPA = 0; $IPAtotal = count(Soal::where('category', 'IPA')->get());
-     
-        foreach($soal as $s) {
-            if(!empty($jawaban[$s->id])) {
-                $pilih = $jawaban[$s->id];
-                
-                if($pilih == $s->key) {
-                    if($s->category == 'BHS') $BHS++;
-                    if($s->category == 'ING') $ING++;
-                    if($s->category == 'MTK') $MTK++;
-                    if($s->category == 'IPA') $IPA++;
+    { 
+        if( Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete' ) {
+            
+            $jawaban = Jawaban::where( 'user_id', Auth::id() )->first();
+            if($jawaban) {
+                if($jawaban->bhs !== NULL) abort(404);
+            }
+
+            $soal = Soal::all();
+            $jawaban = $request->jawaban;
+
+            $BHS = 0; $BHStotal = count(Soal::where('category', 'BHS')->get());
+            $ING = 0; $INGtotal = count(Soal::where('category', 'ING')->get());
+            $MTK = 0; $MTKtotal = count(Soal::where('category', 'MTK')->get());
+            $IPA = 0; $IPAtotal = count(Soal::where('category', 'IPA')->get());
+
+            foreach($soal as $s) {
+                if(!empty($jawaban[$s->id])) {
+                    $pilih = $jawaban[$s->id];
+
+                    if($pilih == $s->key) {
+                        if($s->category == 'BHS') $BHS++;
+                        if($s->category == 'ING') $ING++;
+                        if($s->category == 'MTK') $MTK++;
+                        if($s->category == 'IPA') $IPA++;
+                    }
                 }
             }
+
+            $hasil = Jawaban::where( 'user_id', Auth::id() )->first();
+            $hasil->bhs = $BHS.'/'.$BHStotal;
+            $hasil->ing = $ING.'/'.$INGtotal;
+            $hasil->mtk = $MTK.'/'.$MTKtotal;
+            $hasil->ipa = $IPA.'/'.$IPAtotal;
+            $hasil->save();
+            
+            $user = User::findOrFail(Auth::id());
+            $user->status = 'Complete';
+            $user->save();
+
+            session()->flash('success', 'Ujian berakhir !');
+
+            return redirect()->route('ujian');
+        }else {
+           abort(404); 
         }
-        
-        $hasil = Jawaban::where( 'user_id', Auth::id() )->first();
-        $hasil->bhs = $BHS.'/'.$BHStotal;
-        $hasil->ing = $ING.'/'.$INGtotal;
-        $hasil->mtk = $MTK.'/'.$MTKtotal;
-        $hasil->ipa = $IPA.'/'.$IPAtotal;
-        $hasil->save();
-     
-        $user = User::findOrFail(Auth::id());
-        $user->status = 'Complete';
-        $user->save();
-     
-        session()->flash('success', 'Ujian berakhir !');
-     
-        return redirect()->route('ujian');
     }
     
     public function download_wawancara()

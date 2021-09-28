@@ -42,7 +42,7 @@ $('#ConfirmModal').on('show.bs.modal', function (event) {
         <div class="content">
             <div class="row justify-content-center">
                 <div class="col-xl-8">
-                    @if(Auth::user()->jawaban->bhs)
+                    @if(Auth::user()->jawaban && Auth::user()->jawaban->bhs !== NULL)
                     <div class="card">
                         <div class="card-body text-center p-5">
                             <h4 class="mb-0"><strong>HASIL TEST AKADEMIK</strong></h4>

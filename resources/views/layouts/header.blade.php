@@ -70,7 +70,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="@if(Auth::user()->status !== 'Verified') javascript:void(0); @else {{ route('ujian') }} @endif" class="navbar-nav-link {{ HelperMenu::active('route',['ujian']) }} @if(Auth::user()->status !== 'Verified') disabled @endif">
+						<a href="@if(Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete') {{ route('ujian') }} @else javascript:void(0); @endif" class="navbar-nav-link {{ HelperMenu::active('route',['ujian']) }} @if(Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete') @else disabled @endif">
 							<i class="fas fa-pencil-alt mr-2"></i>
 							Tes Akademik
 						</a>

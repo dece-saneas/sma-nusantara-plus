@@ -103,8 +103,10 @@
                             <p class="alert alert-primary">Anda belum terdaftar di gelombang manapun. Silahkan pilih gelombang yang tersedia di bawah ini!</p>
                             @elseif(Auth::user()->status == 'Isi Identitas')
                             <p class="alert alert-primary">Selamat kamu telah terdaftar di <strong>{{ Auth::user()->gelombang->name }}</strong>. Silahkan isi Data Identitas!</p>
-                            @elseif(Auth::user()->status == 'Upload')
+                            @elseif(Auth::user()->status == 'Upload Berkas')
                             <p class="alert alert-primary">Silahkan Unggah berkas yang dibutuhkan!</p>
+                            @elseif(Auth::user()->status == 'Verified')
+                            <p class="alert alert-primary"><strong>Selamat !</strong>, Pembayaran kamu sudah di Verifikasi. Silahkan Ikuti Tes Akademik untuk menyelesailkan proses pendaftaran!</p>
                             @endif
                         </div>
                     </div>
