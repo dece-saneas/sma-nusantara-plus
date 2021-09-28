@@ -541,6 +541,10 @@ class DashboardController extends Controller
         $hasil->ipa = $IPA.'/'.$IPAtotal;
         $hasil->save();
      
+        $user = User::findOrFail(Auth::id());
+        $user->status = 'Complete';
+        $user->save();
+     
         session()->flash('success', 'Ujian berakhir !');
      
         return redirect()->route('ujian');
@@ -571,6 +575,17 @@ class DashboardController extends Controller
         }else {
             abort(404);
         }
+    }
+    
+    public function download_datasiswa($id)
+    { if (Auth::user()->hasRole('User')) abort(403);
+     
+        $user = User::findOrFail($id);
+     
+        $pdf = PDF::loadview('pdf.data_siswa', ['user' => $user])->setPaper('a4', 'potrait');
+        $pdf->setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+
+        return $pdf->stream('Data Siswa.pdf');
     }
     
     public function resetPassword(Request $request)

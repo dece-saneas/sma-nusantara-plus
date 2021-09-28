@@ -87,7 +87,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                     <td class="text-center">{{ $u->name }}</td>
                                                     <td class="text-center">@if($u->status == 'Isi Identitas' || $u->status == NULL) <span class="badge badge-pill badge-light px-2">Belum di Isi</span> @else {{ $u->identitas->nama_sekolah }} @endif</td>
                                                     <td class="text-center"><span class="badge @if($u->status == 'Verified') badge-primary @else badge-light @endif">@if($u->status == NULL) Pilih Gelombang @else {{ $u->status }} @endif</span></td>
-                                                    <td class="text-center"><button class="btn btn-primary btn-sm"><i class="fas fa-print mr-2"></i>Print</button></td>
+                                                    <td class="text-center"><a href="{{ route('download.datasiswa', $u->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-print mr-2"></i>Print</a></td>
                                                 </tr>
                                                 @endforeach
                                                 @else
