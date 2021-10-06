@@ -36,7 +36,7 @@
 <body class="A4">
     <section class="page">
         <div class="kop">
-            <img src="{{ public_path("img/kop_surat.jpg") }}" alt="kop_surat">
+            <img src="{{ url('img/kop_surat.jpg') }}" alt="kop_surat">
         </div>
         <div class="title">
             <h2 style="margin-bottom: 0;">KARTU WAWANCARA</h2>
@@ -44,7 +44,7 @@
         </div>
         <table>
             <tr>
-                <th rowspan="3"><img src="{{ public_path("img/berkas/".Auth::user()->berkas->photo) }}" alt="kop_surat" width="400px;"></th>
+                <th rowspan="3"><img src="{{ url("img/berkas/".Auth::user()->berkas->photo) }}" alt="kop_surat" width="400px;"></th>
                 <td style="padding-left: 150px;">Nama</th>
                 <td style="padding-left: 100px;">: {{ Auth::user()->name }}</th>
             </tr>

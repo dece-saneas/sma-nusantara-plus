@@ -30,7 +30,7 @@ class DashboardController extends Controller
             $gelombang = Gelombang::findOrFail(Auth::user()->gelombang_id);
 
             if($gelombang->end_period->isPast()) {
-                if(Auth::user()->status !== 'Verified') {
+                if(!Auth::user()->status == 'Verified' || !Auth::user()->status == 'Verified') {
                     $user->gelombang_id = NULL;
                     $user->status = NULL;
                     $user->save();
@@ -579,9 +579,8 @@ class DashboardController extends Controller
             $n = number_format((($j/$s)*100), 0);
             
             if($n >= 65) {
-                $pdf = PDF::loadview('pdf.kartu_wawancara')->setPaper('a4', 'potrait');
-                $pdf->setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
-
+                $pdf = PDF::setOptions(['isRemoteEnabled' => true, 'dpi' => 300, 'defaultFont' => 'sans-serif']);
+                $pdf->loadview('pdf.kartu_wawancara')->setPaper('a4', 'potrait');
                 return $pdf->stream('Kartu Wawancara.pdf');
             }else {
                 abort(404);
@@ -607,7 +606,7 @@ class DashboardController extends Controller
         $user = User::FindOrFail(Auth::id());
         
         $this->validate($request,[
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
         
         $user->password = Hash::make($request['password']);
