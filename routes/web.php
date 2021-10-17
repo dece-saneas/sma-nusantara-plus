@@ -35,16 +35,16 @@ Route::delete('/gelombang/{id}','SettingController@gelombang_destroy')->name('ge
 
 
 Route::get('/daftar-siswa','DashboardController@daftar_siswa')->name('daftar.siswa');
-Route::put('/daftar-siswa/','DashboardController@berkas_invalid')->name('berkas.invalid');
+Route::put('/daftar-siswa','DashboardController@berkas_invalid')->name('berkas.invalid');
 Route::get('/daftar-siswa/valid/{id}/{type}','DashboardController@berkas_valid')->name('berkas.valid');
 
 
 // User
 Route::get('/gelombang/{id}/select', 'DashboardController@gelombang_select')->name('gelombang.select');
 Route::get('/data-identitas','DashboardController@identitas')->name('identitas');
-Route::put('/data-identitas/','DashboardController@identitas_update')->name('identitas.update');
-Route::get('/unggah-berkas/','DashboardController@berkas')->name('berkas');
-Route::put('/unggah-berkas/','DashboardController@berkas_update')->name('berkas.update');
+Route::put('/data-identitas','DashboardController@identitas_update')->name('identitas.update');
+Route::get('/unggah-berkas','DashboardController@berkas')->name('berkas');
+Route::put('/unggah-berkas','DashboardController@berkas_update')->name('berkas.update');
 Route::get('/unggah-berkas/{type}','DashboardController@berkas_destroy')->name('berkas.destroy');
 Route::get('/tes-akademik','DashboardController@ujian')->name('ujian');
 Route::get('/tes-akademik/soal','DashboardController@ujian_soal')->name('ujian.soal');
@@ -54,3 +54,12 @@ Route::get('dashboard/download/kartu-wawancara','DashboardController@download_wa
 Route::get('dashboard/download/data-siswa/{id}','DashboardController@download_datasiswa')->name('download.datasiswa');
 
 Route::post('reset-password','DashboardController@resetPassword')->name('custom.resetpassword');
+
+Route::get('soal', 'DashboardController@soal')->name('soal.index');
+Route::get('dashboard/download/excel', 'DashboardController@download_excel')->name('download.excel');
+Route::post('dashboard/upload/excel', 'DashboardController@upload_excel')->name('upload.excel');
+
+Route::post('dashboard/soal', 'DashboardController@soal_store')->name('soal.store');
+
+Route::delete('/soal/{id}','DashboardController@soal_destroy')->name('soal.destroy');
+Route::put('/soal/{id}','DashboardController@soal_update')->name('soal.update');

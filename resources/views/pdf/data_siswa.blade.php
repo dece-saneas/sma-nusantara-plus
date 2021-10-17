@@ -41,7 +41,7 @@
 <body class="A4">
     <section class="page">
         <div class="kop">
-            <img src="{{ public_path("img/kop_surat.jpg") }}" alt="kop_surat">
+            <img src="{{ url('img/kop_surat.jpg') }}" alt="kop_surat">
         </div>
         <div class="title">
             <h2 style="margin-bottom: 80px;">IDENTITAS DIRI</h2>
@@ -99,7 +99,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="text-align: center"><img src="{{ public_path("img/berkas/".$user->berkas->photo) }}" alt="kop_surat" width="400px;"> <br> <p style="margin: 20px 0 0 0;">No Pendaftaran</p><p style="margin: 0;">{{ $user->no_registration }}</p></th>
+                <td style="text-align: center"><img src="{{ url('img/berkas/'.$user->berkas->photo) }}" alt="photo" width="400px;"> <br> <p style="margin: 20px 0 0 0;">No Pendaftaran</p><p style="margin: 0;">{{ $user->no_registration }}</p></th>
             </tr>
             <tr width="100%;">
                 <td width="1600px">

@@ -55,6 +55,12 @@
 							Daftar Siswa
 						</a>
 					</li>
+                    <li class="nav-item">
+						<a href="{{ route('soal.index') }}" class="navbar-nav-link {{ HelperMenu::active('route',['soal.index']) }}">
+							<i class="fas fa-pencil-alt mr-2"></i>
+							Soal Ujian
+						</a>
+					</li>
                     @endrole
                     @role('User')
 					<li class="nav-item">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth, Image, File, PDF, Hash;
+use Auth, Image, File, PDF, Hash, Response;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SoalImport;
 use App\Models\Gelombang;
 use App\Models\Identitas;
 use App\Models\Keluarga;
@@ -595,8 +597,8 @@ class DashboardController extends Controller
      
         $user = User::findOrFail($id);
      
-        $pdf = PDF::loadview('pdf.data_siswa', ['user' => $user])->setPaper('a4', 'potrait');
-        $pdf->setOptions(['dpi' => 300, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['isRemoteEnabled' => true, 'dpi' => 300, 'defaultFont' => 'sans-serif']);
+        $pdf->loadview('pdf.data_siswa', ['user' => $user])->setPaper('a4', 'potrait');
 
         return $pdf->stream('Data Siswa.pdf');
     }
@@ -615,5 +617,111 @@ class DashboardController extends Controller
         session()->flash('success', 'Password Berhasil di Ubah !');
         
         return redirect()->back();
+    }
+
+    public function soal()
+    { if (Auth::user()->hasRole('User')) abort(403);
+
+        $soal = Soal::paginate(10);
+
+        return view('pages.soal-index', ['soal' => $soal]);
+    }
+
+    public function download_excel()
+    { if (Auth::user()->hasRole('User')) abort(403);
+
+        $file= public_path(). "/file/SoalExample.xlsx";
+        $headers = array(
+              'Content-Type: application/octet-stream',
+            );
+        return Response::download($file, 'Template Soal.xlsx', $headers);
+    }
+
+    public function upload_excel(Request $request)
+    { if (Auth::user()->hasRole('User')) abort(403);
+
+        $this->validate($request,[
+            'file' => 'required|max:2048',
+        ]);
+        
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+
+        $file->move('file/',$file->getClientOriginalName());
+
+        $path = public_path('/file').'/'.$name;
+
+        Excel::import(new SoalImport, $path);
+
+        session()->flash('success', 'Soal Berhasil di Upload !');
+        
+        return back();
+    }
+
+    public function soal_store(Request $request)
+    { if (Auth::user()->hasRole('User')) abort(403);
+
+        $this->validate($request,[
+            'category' => 'required',
+            'soal' => 'required',
+            'a' => 'required',
+            'b' => 'required',
+            'c' => 'required',
+            'd' => 'required',
+            'key' => 'required',
+        ]);
+        
+        Soal::create([
+            'category' => $request->category,
+            'soal' => $request->soal,
+            'a' => $request->a,
+            'b' => $request->b,
+            'c' => $request->c,
+            'd' => $request->d,
+            'key' => $request->key
+        ]);
+
+        session()->flash('success', 'Soal Berhasil di Buat !');
+        
+        return back();
+    }
+    
+    public function soal_destroy($id)
+    {
+        $soal = Soal::findOrFail($id);
+        $soal->delete();
+        
+        session()->flash('success', 'Soal berhasil di hapus !');
+        
+        return redirect()->route('soal.index');
+    }
+
+    public function soal_update(Request $request, $id)
+    { if (Auth::user()->hasRole('User')) abort(403);
+
+        $this->validate($request,[
+            'category' => 'required',
+            'soal' => 'required',
+            'a' => 'required',
+            'b' => 'required',
+            'c' => 'required',
+            'd' => 'required',
+            'key' => 'required',
+        ]);
+        
+        $soal = Soal::findOrFail($id);
+
+        $soal->soal = $request->soal;
+        $soal->key = $request->key;
+        $soal->a = $request->a;
+        $soal->b = $request->b;
+        $soal->c = $request->c;
+        $soal->d = $request->d;
+        $soal->category = $request->category;
+        $soal->save();
+
+        session()->flash('success', 'Soal Berhasil di Ubah !');
+        
+        return back();
     }
 }

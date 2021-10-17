@@ -123,35 +123,35 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                                 @if(count($unverified) > 0)
                                                 @foreach($unverified as $no => $u)
                                                 <tr>
-                                                    <td class="text-center">{{ $no+1+(($unverified->currentPage()-1)*20) }}</td>
-                                                    <td class="text-center">{{ $u->user->no_registration }}</td>
-                                                    <td class="text-center">{{ $u->user->name }}</td>
-                                                    <td class="text-center">{{ $u->user->identitas->nama_sekolah }}</td>
-                                                    <td class="text-center">
-                                                        @if($u->photo == NULL)
-                                                        <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
-                                                        @elseif($u->photo_status == 'Terverifikasi')
-                                                        <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
-                                                        @else
-                                                        <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->photo) }}" data-type="photo" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'photo']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-center">
-                                                        @if($u->surat_ket_sehat == NULL)
-                                                        <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
-                                                        @elseif($u->surat_ket_sehat_status == 'Terverifikasi')
-                                                        <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
-                                                        @else
-                                                        <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->surat_ket_sehat) }}" data-type="sehat" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'sehat']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-center">
-                                                        @if($u->payment == NULL)
-                                                        <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
-                                                        @elseif($u->payment_status == 'Terverifikasi')
-                                                        <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
-                                                        @else
-                                                        <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->payment) }}" data-type="payment" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'payment']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
+                                                <td class="text-center">{{ $no+1+(($unverified->currentPage()-1)*20) }}</td>
+                                                <td class="text-center">{{ $u->user->no_registration }}</td>
+                                                <td class="text-center">{{ $u->user->name }}</td>
+                                                <td class="text-center">{{ $u->user->identitas->nama_sekolah }}</td>
+                                                <td class="text-center">
+                                                @if($u->photo == NULL)
+                                                <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
+                                                @elseif($u->photo_status == 'Terverifikasi')
+                                                <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
+                                                @else
+                                                <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->photo) }}" data-type="photo" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'photo']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
+                                                @endif
+                                                </td>
+                                                <td class="text-center">
+                                                @if($u->surat_ket_sehat == NULL)
+                                                <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
+                                                @elseif($u->surat_ket_sehat_status == 'Terverifikasi')
+                                                <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
+                                                @else
+                                                <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->surat_ket_sehat) }}" data-type="sehat" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'sehat']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
+                                                @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($u->payment == NULL)
+                                                    <button class="btn btn-sm" disabled><i class="fas fa-times mr-2"></i>Belum ada Berkas</button>
+                                                    @elseif($u->payment_status == 'Terverifikasi')
+                                                    <button class="btn btn-sm btn-primary" disabled><i class="fas fa-check mr-2"></i>Terverifikasi</button>
+                                                    @else
+                                                    <button class="btn btn-sm" data-toggle="modal" data-target="#PreviewModal" data-img="{{ asset('img/berkas/'.$u->payment) }}" data-type="payment" data-id="{{ $u->id }}" data-valid="{{ route('berkas.valid',[$u->id, 'payment']) }}"><i class="fas fa-search-plus mr-2"></i>Preview</button>
                                                         @endif
                                                     </td>
                                                 </tr>

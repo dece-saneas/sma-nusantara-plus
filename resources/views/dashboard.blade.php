@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-header header-elements-inline justify-content-between">
                             <h5 class="card-title">Daftar Gelombang</h5>
-                            <a href="{{ route('gelombang.create') }}" class="btn btn-success"> <i class="fas fa-plus mr-2"></i>Buat Gelombang</a>
+                            <a href="{{ route('gelombang.create') }}" class="btn btn-primary"> <i class="fas fa-plus mr-2"></i>Buat Gelombang</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
