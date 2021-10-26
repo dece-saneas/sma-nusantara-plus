@@ -29,7 +29,13 @@
 </div>
 @endsection
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/select.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/select-bootstrap4.min.css') }}">
+@endsection
+
 @section('script')
+<script src="{{ asset('js/select.min.js') }}"></script>
 <script>
 // Preview
 $('#PreviewModal').on('show.bs.modal', function (event) {
@@ -44,6 +50,12 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
     $("#id").attr("value", id);
     $("#valid").attr("href", valid);
 })
+
+$( "#filter-year" ).change(function() {
+    var year = $(this).val();
+    
+    window.location = "{{ route('daftar.siswa') }}?year="+year;
+});
 </script>
 @endsection
 
@@ -54,6 +66,18 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
             <div class="row justify-content-center">
                 <div class="col-xl-12">
                     <div class="card">
+                        <div class="card-header">
+                            <div class="row justify-content-end">
+                                <div class="col-2">
+                                    <select class="form-control select " id="filter-year" name="year" width=>
+                                    <option disabled>Pilih tahun ajaran</option>
+                                        <option value="2019" @if( request()->get('year') == '2019') selected @elseif( request()->get('year') == null && Carbon\Carbon::now()->year == '2019')  selected @endif>2019</option>
+                                        <option value="2021" @if( request()->get('year') == '2021') selected @elseif(  request()->get('year') == null && Carbon\Carbon::now()->year == '2021')  selected  @endif>2021</option>
+                                        <option value="2022" @if( request()->get('year') == '2022') selected @elseif(  request()->get('year') == null && Carbon\Carbon::now()->year == '2022')  selected  @endif>2022</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-header">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">

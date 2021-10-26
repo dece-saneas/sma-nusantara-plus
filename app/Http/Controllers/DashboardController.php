@@ -404,14 +404,21 @@ class DashboardController extends Controller
     
 // ---------------------------------------------------------------------------------------------------------------------------------------------- DAFTAR SISWA
     
-    public function daftar_siswa()
+    public function daftar_siswa(Request $request)
     { if( Auth::user()->hasRole('User') ) abort(404);
         $siswa = User::role('User')->paginate(20);
-        $verified = User::where('status', 'Verified')->paginate(20);
+        $verified = User::role('User')->where('status', 'Verified')->paginate(20);
         $unverified = Berkas::where('photo_status', 'Menunggu Verifikasi')
                             ->orWhere('surat_ket_sehat_status', 'Menunggu Verifikasi')
                             ->orWhere('payment_status', 'Menunggu Verifikasi')->paginate(20);
         
+        if($request->input('year') !== null) {
+            $siswa = User::role('User')->whereYear('created_at', $request->year)->paginate(20);
+            $verified = User::role('User')->where('status', 'Verified')->whereYear('created_at', $request->year)->paginate(20);
+            $unverified = Berkas::where('photo_status', 'Menunggu Verifikasi')
+                                ->orWhere('surat_ket_sehat_status', 'Menunggu Verifikasi')
+                                ->orWhere('payment_status', 'Menunggu Verifikasi')->whereYear('created_at', $request->year)->paginate(20);
+        }
         return view('pages.daftar-siswa', ['siswa' => $siswa, 'unverified' => $unverified, 'verified' => $verified]);
     }
     
