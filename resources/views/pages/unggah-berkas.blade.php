@@ -141,7 +141,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                     <p>Pastikan nominal sesuai dengan yang tertera agar proses verifikasi lebih cepat. Panitia akan memverifikasi Pembayaran anda maksimal 2×24 jam.</p>
                                 </div>
                                 <div class="col-lg-3 text-right">
-                                    <div class="jumbotron mb-2 p-2 @if(Auth::user()->status == 'Verified') bg-primary @endif">
+                                    <div class="jumbotron mb-2 p-2 @if(Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete') bg-primary @endif">
                                         <div class="row">
                                             <div class="col-3">
                                                 <h1 class="m-2"><i class="fas fa-credit-card"></i></h1>
@@ -153,7 +153,7 @@ $('#PreviewModal').on('show.bs.modal', function (event) {
                                             </div>
                                         </div>
                                     </div>
-                                    @if(Auth::user()->status == 'Verified')
+                                    @if(Auth::user()->status == 'Verified' || Auth::user()->status == 'Complete')
                                     <p class="m-0"><strong>Batas Verifikasi</strong></p>
                                     <a href="javascript:void(0)"><strong><span>Berkas Terverifikasi</span></strong></a>
                                     @else
